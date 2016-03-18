@@ -1,0 +1,79 @@
+<md-content scroll ng-class="{min:boolChangeClass}" class="extend-toolbar fixed" ng-class="active" layout="row" layout-align="center end">
+    <md-input-container class="md-icon-right">
+        <md-icon md-svg-icon="img/search.svg"></md-icon>
+        <input focus-me="true" ng-keyup="$event.keyCode == 13 && pressEnter(filteredPeople[0].email)" class="search-input" ng-model="query" tabindex="1" id="filter" aria-label="search">
+    </md-input-container>
+</md-content>
+
+<md-content class="people-random" layout="row" layout-wrap layout-align="center center" ng-class="!query || (query.length < 1) ? 'animation-show' : 'animation-hide';">
+    <div class="people-list-loading" ng-show="loading" layout="row" layout-wrap layout-align="center center">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+    <div flex="100" flex-xs="100" flex-sm="75" flex-gt-sm="40" ng-show="!loading">
+        <h1>Connaissez-vous ?</h1>
+        <md-card class="md-whiteframe-4dp">
+            <md-card-title layout="row">
+                <md-card-title-text layout="column" layout-align="space-around" flex="70">
+                    <span class="md-headline"><a href="#/people/{{random.email}}">{{random.firstName | capitalize}} {{random.lastName | uppercase}}</a></span>
+			    <span layout="column" flex="100">
+            <div>{{random.functionName}}</div>
+            <br/>
+            <div><md-icon md-svg-icon="img/md-email.svg"></md-icon> <a href="mailto:{{random.name}}<{{random.email}}>" title="écrire un courriel à {{random.firstName | capitalize}} {{random.lastName}}">{{random.email}}</a></div>
+					  <div ng-if="random.contactInfoPro.mobilePhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon> <a href="tel:{{random.contactInfoPro.mobilePhone}}" title="appeler {{random.firstName | capitalize}} sur son mobile">{{random.contactInfoPro.mobilePhone}}</a></div>
+            <div ng-if="!random.contactInfoPro.mobilePhone && random.contactInfoPro.fixedPhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon><a href="tel:{{random.contactInfoPro.fixedPhone}}" title="appeler {{random.firstName | capitalize}} sur son mobile">{{random.contactInfoPro.fixedPhone}}</a></div>
+          </span>
+                </md-card-title-text>
+                <md-card-title-media flex="30">
+                    <div class="card-media">
+                        <a href="#/people/{{random.email}}"><img class="thumb" err-src="../img/profile.svg" ng-src="{{photo(random)}}"></a>
+                    </div>
+                </md-card-title-media>
+            </md-card-title>
+
+            <md-card-content>
+                Responsable/Manager:  <a href="#/people/{{random.manager}}">{{random.manager}}</a>
+                <br>
+                Localisation : <a href="http://www.sfeir.com/contact/">{{random.entity}}</a>
+                <br>
+                <a ng-show="random.entity == 'Sfeir-Benelux'" target="_blank" title="Le localiser" href="http://sfeirmaplux.appspot.com/#sferian/{{mySplit(random.email)}}"><md-icon md-svg-icon="img/md-map.svg"></md-icon></a>
+                <a ng-show="random.entity == 'Sfeir-Paris'" target="_blank" title="Le localiser" href="http://map.sfeir.com/#sferian/{{mySplit(random.email)}}"><md-icon md-svg-icon="img/md-map.svg"></md-icon></a>
+            </md-card-content>
+
+        </md-card>
+    </div>
+</md-content>
+
+<md-content class="people-list md-padding" layout="row" layout-wrap layout-align="center center" ng-show="query && query.length >= 1">
+    <div class="people-card-list" ng-repeat="sfeirien in filteredPeople = (people | reFilter: query)" flex="100" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="33" layout="column">
+        <md-card class="md-whiteframe-4dp" ng-class='{first:$first}'>
+            <md-card-title layout="row">
+                <md-card-title-text layout="column" layout-align="space-around" flex="60">
+                    <span class="md-headline"><a href="#/people/{{sfeirien.email}}">{{sfeirien.firstName | capitalize}} {{sfeirien.lastName | uppercase}}</a></span>
+	        <span layout="column" flex="100">
+            <div>{{sfeirien.functionName}}</div>
+            <br/>
+            <div><md-icon md-svg-icon="img/md-email.svg"></md-icon> <a href="mailto:{{sfeirien.name}}<{{sfeirien.email}}>" title="écrire un courriel à {{sfeirien.firstName | capitalize}} {{sfeirien.lastName}}">{{sfeirien.email}}</a></div>
+					  <div ng-if="sfeirien.contactInfoPro.mobilePhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon> <a href="tel:{{sfeirien.contactInfoPro.mobilePhone}}" title="appeler {{sfeirien.firstName | capitalize}} sur son mobile">{{sfeirien.contactInfoPro.mobilePhone}}</a></div>
+            <div ng-if="!sfeirien.contactInfoPro.mobilePhone && sfeirien.contactInfoPro.fixedPhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon><a href="tel:{{sfeirien.contactInfoPro.fixedPhone}}" title="appeler {{sfeirien.firstName | capitalize}} sur son mobile">{{sfeirien.contactInfoPro.fixedPhone}}</a></div>
+          </span>
+                </md-card-title-text>
+                <md-card-title-media flex="40">
+                    <div class="card-media">
+                        <a href="#/people/{{sfeirien.email}}"><img class="thumb" err-src="../img/profile.svg" ng-src="{{photo(sfeirien)}}"></a>
+                    </div>
+                </md-card-title-media>
+            </md-card-title>
+
+            <md-card-content>
+                Responsable/Manager :  <a href="#/people/{{sfeirien.manager}}">{{sfeirien.manager}}</a>
+                <br>
+                Localisation : <a href="http://www.sfeir.com/contact/">{{sfeirien.entity}}</a>
+            </md-card-content>
+        </md-card>
+    </div>
+    <div ng-show="filteredPeople.length <= 0 && !loading">
+        <md-content>
+            <h1>Aucun sfeirien trouvé</h1>
+        </md-content>
+    </div>
+</md-content>

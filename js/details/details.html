@@ -1,0 +1,129 @@
+<md-content ng-class="{min:boolChangeClass}" class="extend-toolbar" ng-class="active" layout="row" layout-align="center center">
+    <md-input-container class="md-icon-right">
+        <md-icon md-svg-icon="img/search.svg"></md-icon>
+        <input ng-keyup="$event.keyCode == 13 && pressEnter(query)" class="search-input" ng-model="query" tabindex="1" id="filter" aria-label="search">
+    </md-input-container>
+</md-content>
+
+
+<md-content class="md-padding people-detail" layout="row" layout-wrap layout-align="center center" layout-xs="column">
+    <div flex="50" flex-sm="75" flex-xs="100" layout="column">
+        <md-card class="md-whiteframe-4dp">
+            <!-- <div class="background-md-card" layout="row" layout-wrap layout-align="center center">
+              <div class="img-circle">
+                <img err-src="../img/profile.svg" ng-src="{{photo(sfeirien)}}" alt="image profile" />
+              </div>
+            </div> -->
+            <md-card-title>
+                <md-card-title-text class="first-info-people" layout="row">
+          <span flex="75">
+            <span class="md-headline"><a href="#/people/{{sfeirien.email}}">{{sfeirien.firstName | capitalize}} {{sfeirien.lastName | uppercase}}</a></span>
+  	        <span layout="column" class="layout-column" flex="100">
+              <div>{{sfeirien.functionName}}</div>
+              <br/>
+              <div><md-icon md-svg-icon="img/md-email.svg"></md-icon> <a href="mailto:{{sfeirien.name}}<{{sfeirien.email}}>" title="écrire un courriel à {{sfeirien.firstName | capitalize}} {{sfeirien.lastName}}">{{sfeirien.email}}</a></div>
+  					  <div ng-if="sfeirien.contactInfoPro.mobilePhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon> <a href="tel:{{sfeirien.contactInfoPro.mobilePhone}}" title="appeler {{sfeirien.firstName | capitalize}} sur son mobile">{{sfeirien.contactInfoPro.mobilePhone}}</a></div>
+              <div ng-if="!sfeirien.contactInfoPro.mobilePhone && sfeirien.contactInfoPro.fixedPhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon><a href="tel:{{sfeirien.contactInfoPro.fixedPhone}}" title="appeler {{sfeirien.firstName | capitalize}} sur son mobile">{{sfeirien.contactInfoPro.fixedPhone}}</a></div>
+              <br/>
+              <div>Responsable/Manager :  <a href="#/people/{{sfeirien.manager}}">{{sfeirien.manager}}</a></div>
+              <div>
+                  Localisation : <a href="http://www.sfeir.com/contact/">{{sfeirien.entity}}</a>
+                  <br>
+                  <a ng-show="sfeirien.entity == 'Sfeir-Benelux'" target="_blank" title="Le localiser" href="http://sfeirmaplux.appspot.com/#sferian/{{mySplit(sfeirien.email)}}"><md-icon md-svg-icon="img/md-map.svg"></md-icon></a>
+                  <a ng-show="sfeirien.entity == 'Sfeir-Paris'" target="_blank" title="Le localiser" href="http://map.sfeir.com/#sferian/{{mySplit(sfeirien.email)}}"><md-icon md-svg-icon="img/md-map.svg"></md-icon></a>
+              </div>
+            </span>
+          </span>
+                    <div flex class="img-circle">
+                        <img class="thumb" err-src="../img/profile.svg" ng-src="{{photo(sfeirien)}}" alt="image profile" />
+                    </div>
+                </md-card-title-text>
+            </md-card-title>
+
+            <md-tabs md-dynamic-height md-border-bottom class="tab-information">
+                <md-tab label="Organisation">
+                    <md-content class="md-padding">
+                        <ul>
+                            <li>{{sfeirien.functionName}}</li>
+                            <li><br/>{{sfeirien.functionDescription || "-"}}</li>
+                        </ul>
+                        <ul>
+                            <li>Client actuel</li>
+                            <li>{{sfeirien.currentClient || "—"}}</li>
+                        </ul>
+                        <h3 ng-show="sfeirien.skills[0] != ''">Compétences</h3>
+                        <div  layout="row" layout-wrap layout-align="space-around center">
+                            <md-button aria-label="skill" ng-show="skill" class="md-raised" ng-repeat="skill in sfeirien.skills track by $index" ng-href="#/people/skill/{{skill}}">{{skill}}</md-button>
+                        </div>
+                    </md-content>
+                </md-tab>
+
+                <md-tab ng-disabled="manager.isManager ? false : true" label="Collaborateurs">
+                    <md-content id="skills" class="md-padding">
+                        <div  layout="row" layout-wrap layout-align="space-around center">
+                            <p ng-repeat="collab in manager.collab"><a ng-href="#/people/{{collab}}">{{collab}}</a></p>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <!-- <md-tab label="Perso">
+                  <md-content class="md-padding">
+                    <ul>
+                      <li>Date de naissance</li>
+                      <li>{{sfeirien.birthDate|| "antédiluvien"}}</li>
+                    </ul>
+                    <ul>
+                      <li>Taille de t-shirt</li>
+                      <li>{{sfeirien.tshirtSize}}</li>
+                    </ul>
+                    <ul>
+                      <li>courriel</li>
+                      <li><a href="mailto:{{sfeirien.firstName}}<{{sfeirien.contactInfoPerso.email}}>">{{sfeirien.contactInfoPerso.email}}</a></li>
+                    </ul>
+                    <ul>
+                      <li ng-if="sfeirien.contactInfoPerso.fixedPhone">Téléphone fixe</li>
+                      <li><a ng-if="sfeirien.contactInfoPerso.fixedPhone" title="appeler {{sfeirien.firstName}} sur son fixe" href="tel:{{sfeirien.contactInfoPerso.fixedPhone}}">{{sfeirien.contactInfoPerso.fixedPhone}}</a></li>
+                    </ul>
+                    <ul>
+                      <li ng-if="sfeirien.contactInfoPerso.mobilePhone">Mobile</li>
+                      <li><a ng-if="sfeirien.contactInfoPerso.mobilePhone" title="appeler {{sfeirien.firstName}} sur son mobile" href="tel:{{sfeirien.contactInfoPerso.mobilePhone}}">{{sfeirien.contactInfoPerso.mobilePhone}}</a></li>
+                    </ul>
+                    <ul>
+                      <li>Adresse</li>
+                      <li>{{sfeirien.contactInfoPerso.street}} <br>{{sfeirien.contactInfoPerso.postalCode}} {{sfeirien.contactInfoPerso.city}}</li>
+                    </ul>
+                  </md-content>
+                </md-tab> -->
+            </md-tabs>
+
+            <md-card-footer class="information-footer" layout="row" layout-wrap layout-align="center center">
+                <md-card-icon-actions>
+                    <md-button target="_blank" href="https://twitter.com/{{sfeirien.twitter}}" class="md-icon-button" aria-label="twitter">
+                        <md-tooltip md-direction="top">
+                            twitter
+                        </md-tooltip>
+                        <md-icon md-svg-icon="img/md-twitter.svg"></md-icon>
+                    </md-button>
+                    <md-button target="_blank" href="https://sfeirgroup.slack.com/messages/@{{sfeirien.slack}}/" class="md-icon-button" aria-label="slack">
+                        <md-tooltip md-direction="top">
+                            Slack
+                        </md-tooltip>
+                        <md-icon md-svg-icon="img/md-slack.svg"></md-icon>
+                    </md-button>
+                    <md-button target="_blank" href="https://github.com/{{sfeirien.github}}" class="md-icon-button" aria-label="github">
+                        <md-tooltip md-direction="top">
+                            GitHub
+                        </md-tooltip>
+                        <md-icon md-svg-icon="img/md-github.svg"></md-icon>
+                    </md-button>
+                    <md-button target="_blank" href="{{sfeirien.linkedIn}}" class="md-icon-button" aria-label="linkedin">
+                        <md-tooltip md-direction="top">
+                            Linkedin
+                        </md-tooltip>
+                        <md-icon md-svg-icon="img/md-linkedin.svg"></md-icon>
+                    </md-button>
+                </md-card-icon-actions>
+            </md-card-footer>
+
+        </md-card>
+    </div>
+</md-content>

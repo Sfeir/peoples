@@ -9,6 +9,11 @@
 
     function config($routeProvider) {
         $routeProvider
+            .when('/home', {
+                templateUrl : 'js/home/home.html',
+                controller  : 'HomeController',
+                controllerAs  : 'homeCtrl'
+            })
             .when('/people/skill/:skill', {
                 templateUrl : 'partials/people-skills.html',
                 controller  : 'PeopleSkillCtrl'
@@ -25,12 +30,13 @@
                 templateUrl : 'partials/people-list.html',
                 controller  : 'PeopleListCtrl'
             })
-            .when('/people/:email', {
-                templateUrl : 'partials/people-detail.html',
-                controller  : 'PeopleDetailCtrl'
+            .when('/people/:id', {
+                templateUrl : 'js//details/details.html',
+                controller  : 'DetailsController',
+                controllerAs  : 'detailsCtrl'
             })
             .otherwise({
-                redirectTo : '/people'
+                redirectTo : '/home'
             });
     }
 })();
