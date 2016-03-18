@@ -1,7 +1,7 @@
 {
-  "name": "sfeirpeople-front",
-  "version": "0.1.0",
-  "description": "front-end du Sfeirbook",
+  "name": "peoples",
+  "version": "1.0.0",
+  "description": "A experimentation of PWA's with Angular 1 and Materials",
   "main": "./index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sfeir/sfeirtrombi.git"
+    "url": "git+https://github.com/Sfeir/peoples.git"
   },
   "keywords": [
-    "localStorage"
+    "PWA, service worker, angular, materials"
   ],
-  "author": "David Junger <junger.d@sfeir.com>",
+  "author": "Cyril Balit <balit.c@sfeir.com>",
   "bugs": {
-    "url": "https://github.com/Sfeir/sfeirtrombi/issues"
+    "url": "https://github.com/Sfeir/peoples/issues"
   },
-  "homepage": "https://github.com/Sfeir/sfeirtrombi#readme",
+  "homepage": "https://github.com/Sfeir/peoples#readme",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-all": "^1.1.0",
