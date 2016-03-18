@@ -22,7 +22,7 @@ angular.module('trombiServices', []).factory('People', ['$http',
   function($http){
     var m = new Map();
     var data = localStorage.getItem("people");
-    var promise = $http.get('/people.json')
+    var promise = $http.get('/mocks/people.json')
     .then(function (response){
       localStorage.setItem("people", JSON.stringify(response.data));
       return Promise.resolve(response.data);
