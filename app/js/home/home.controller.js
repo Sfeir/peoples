@@ -16,7 +16,6 @@
             $scope.people = [];
             $scope.filteredPeople = [];
             $scope.random = [];
-            $scope.photo = photo;
             $scope.loading = true;
 
             $scope.queryAll = $rootScope.search || "";

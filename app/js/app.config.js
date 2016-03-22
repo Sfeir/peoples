@@ -14,24 +14,25 @@
                 controller  : 'HomeController',
                 controllerAs  : 'homeCtrl'
             })
-            .when('/people/skill/:skill', {
-                templateUrl : 'partials/people-skills.html',
-                controller  : 'PeopleSkillCtrl'
-            })
             .when('/people/tagcloud', {
                 templateUrl : 'partials/people-tagcloud.html',
                 controller  : 'SkillCloudCtrl'
             })
             .when('/people/all', {
-                templateUrl : 'partials/people-list-all.html',
-                controller  : 'PeopleListCtrl'
+                redirectTo : '/people'
             })
             .when('/people', {
-                templateUrl : 'partials/people-list.html',
-                controller  : 'PeopleListCtrl'
+                templateUrl : 'js/list/list.html',
+                controller  : 'ListController',
+                controllerAs  : 'listCtrl'
+            })
+            .when('/people/skill/:skill', {
+                templateUrl : 'js/skills/skills.html',
+                controller  : 'SkillsController',
+                controllerAs  : 'skillsCtrl'
             })
             .when('/people/:id', {
-                templateUrl : 'js//details/details.html',
+                templateUrl : 'js/details/details.html',
                 controller  : 'DetailsController',
                 controllerAs  : 'detailsCtrl'
             })

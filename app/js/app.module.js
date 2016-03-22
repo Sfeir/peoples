@@ -6,12 +6,11 @@
         'ngAnimate',
         'ngMessages',
         'ngMaterial',
+        'peoples-components',
         'peoples-home',
         'peoples-list',
         'peoples-details',
-        'trombiServices',
-        'trombiControllers',
-        'trombiFilters'
+        'peoples-skills'
     ])
 })();
 

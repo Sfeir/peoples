@@ -15,7 +15,6 @@
         function activate() {
             $scope.sfeirien = {};
             $scope.manager = {};
-            $scope.photo = photo;
 
             People.$promise.then(function (){
                 $scope.sfeirien = People.get($routeParams.id);
