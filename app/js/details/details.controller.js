@@ -5,10 +5,9 @@
         .module('peoples-details')
         .controller('DetailsController', DetailsController);
 
-    DetailsController.$inject = ['$scope','$routeParams', 'People'];
+    DetailsController.$inject = ['$scope','$routeParams', '$location', '$rootScope', 'People'];
 
-    function DetailsController($scope, $routeParams, People) {
-        var vm = this;
+    function DetailsController($scope, $routeParams, $location, $rootScope, People) {
 
         activate();
 
@@ -16,19 +15,24 @@
             $scope.sfeirien = {};
             $scope.manager = {};
 
-            People.$promise.then(function (){
+            People.$promise.then(function() {
                 $scope.sfeirien = People.get($routeParams.id);
                 $scope.manager = People.getCollab($routeParams.id);
             });
+
             $scope.mySplit = function(string) {
-                if(string == undefined)
-                    return;
-                var array = string.split('@');
-                return array[0];
+                var result;
+                if (string) {
+                    result = string.split('@')[0];
+                }
+                return result;
             };
-            $scope.pressEnter = function(adr){
-                $rootScope.search = adr;
-                $location.path('/people/all');
+
+            $scope.pressEnter = function(adr) {
+                if (adr) {
+                    $rootScope.search = adr;
+                    $location.path('/people/' + adr);
+                }
             };
         }
 

@@ -7,11 +7,8 @@
         'ngMessages',
         'ngMaterial',
         'peoples-components',
-        'peoples-home',
         'peoples-list',
         'peoples-details',
         'peoples-skills'
-    ])
+    ]);
 })();
-
-

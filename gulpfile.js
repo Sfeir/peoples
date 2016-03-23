@@ -2,6 +2,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var all = require('gulp-all');
+var eslint = require('gulp-eslint');
 var inlineAngularTemplates = require('gulp-inline-angular-templates');
 var htmlreplace = require('gulp-html-replace');
 var watch = require('gulp-watch');
@@ -65,6 +66,12 @@ gulp.task("build", function build() {
     gulp.src('favicon.ico')
       .pipe(gulp.dest('build/'))
     ])
+});
+
+gulp.task('eslint', function() {
+  return gulp.src('app/js/**/*.js')
+      .pipe(eslint())
+      .pipe(eslint.format());
 });
 
 gulp.task('watch', function () {

@@ -1,4 +1,3 @@
-
 (function() {
     'use strict';
 
@@ -9,15 +8,13 @@
     ToolbarController.$inject = ['$scope', '$location'];
 
     function ToolbarController($scope, $location) {
-        var vm = this;
-
         activate();
 
         function activate() {
-            $scope.active = "";
-            if ($location.url() === "/people") {
-                $scope.active = "active";
-            };
+            $scope.active = '';
+            if ($location.url() === '/people') {
+                $scope.active = 'active';
+            }
         }
 
     }

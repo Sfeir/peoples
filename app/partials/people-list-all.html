@@ -28,9 +28,9 @@
 	    </md-card-title>
 
       <md-card-content>
-          Responsable/Manager:  <a href="#/people/{{sfeirien.manager}}">{{sfeirien.manager}}</a>
+          Manager:  <a href="#/people/{{sfeirien.manager}}">{{sfeirien.manager}}</a>
           <br>
-          Localisation : <a href="http://www.sfeir.com/contact/">{{sfeirien.entity}}</a>
+          Location : <a href="http://www.sfeir.com/contact/">{{sfeirien.entity}}</a>
           <br>
           <a ng-show="sfeirien.entity == 'Sfeir-Benelux'" target="_blank" title="Le localiser" href="http://sfeirmaplux.appspot.com/#sferian/{{mySplit(sfeirien.email)}}"><md-icon md-svg-icon="img/md-map.svg"></md-icon></a>
           <a ng-show="sfeirien.entity == 'Sfeir-Paris'" target="_blank" title="Le localiser" href="http://map.sfeir.com/#sferian/{{mySplit(sfeirien.email)}}"><md-icon md-svg-icon="img/md-map.svg"></md-icon></a>
@@ -40,7 +40,7 @@
 	</div>
   <div ng-show="filteredPeople.length <= 0 && !loading">
     <md-content>
-      <h1>Aucun sfeirien trouvé</h1>
+      <h1>No sfeirien found</h1>
     </md-content>
   </div>
 </md-content>

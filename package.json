@@ -4,13 +4,15 @@
   "description": "A experimentation of PWA's with Angular 1 and Materials",
   "main": "./index.html",
   "author": {
-     "name": "Cyril Balit",
-     "email": "<balit.c@sfeir.com>"
+    "name": "Cyril Balit",
+    "email": "<balit.c@sfeir.com>"
   },
-  "contributors": [{
-    "name": "Florian Orpelière",
-    "email": "florian.orpeliere@gmail.com"
-  }],
+  "contributors": [
+    {
+      "name": "Florian Orpelière",
+      "email": "florian.orpeliere@gmail.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sfeir/peoples.git"
@@ -27,10 +29,11 @@
   },
   "homepage": "https://github.com/Sfeir/peoples#readme",
   "dependencies": {
-    "angular-route": "^1.5.2",
     "angular": "^1.5.2",
+    "angular-material": "^1.0.1",
+    "angular-route": "^1.5.2",
     "bootstrap": "^3.3.6",
-    "angular-material": "^1.0.1"
+    "gulp-eslint": "^2.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

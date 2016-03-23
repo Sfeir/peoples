@@ -10,7 +10,7 @@
     	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
   	</div>
 	<div flex="100" flex-xs="100" flex-sm="75" flex-gt-sm="40" ng-show="!loading">
-		<h1>Connaissez-vous ?</h1>
+		<h1>Do you know ?</h1>
 		<md-card class="md-whiteframe-4dp">
 			<md-card-title layout="row">
 			  <md-card-title-text layout="column" layout-align="space-around" flex="70">
@@ -18,9 +18,18 @@
 			    <span layout="column" flex="100">
             <div>{{random.functionName}}</div>
             <br/>
-            <div><md-icon md-svg-icon="img/md-email.svg"></md-icon> <a href="mailto:{{random.name}}<{{random.email}}>" title="écrire un courriel à {{random.firstName | capitalize}} {{random.lastName}}">{{random.email}}</a></div>
-					  <div ng-if="random.contactInfoPro.mobilePhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon> <a href="tel:{{random.contactInfoPro.mobilePhone}}" title="appeler {{random.firstName | capitalize}} sur son mobile">{{random.contactInfoPro.mobilePhone}}</a></div>
-            <div ng-if="!random.contactInfoPro.mobilePhone && random.contactInfoPro.fixedPhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon><a href="tel:{{random.contactInfoPro.fixedPhone}}" title="appeler {{random.firstName | capitalize}} sur son mobile">{{random.contactInfoPro.fixedPhone}}</a></div>
+            <div>
+               <md-icon md-svg-icon="img/md-email.svg"></md-icon>
+               <a href="mailto:{{random.name}}<{{random.email}}>" title="écrire un courriel à {{random.firstName | capitalize}} {{random.lastName}}">{{random.email}}</a>
+            </div>
+			   <div ng-if="random.contactInfoPro.mobilePhone">
+               <md-icon md-svg-icon="img/md-phone.svg"></md-icon>
+               <a href="tel:{{random.contactInfoPro.mobilePhone}}" title="appeler {{random.firstName | capitalize}} sur son mobile">{{random.contactInfoPro.mobilePhone}}</a>
+            </div>
+            <div ng-if="!random.contactInfoPro.mobilePhone && random.contactInfoPro.fixedPhone">
+               <md-icon md-svg-icon="img/md-phone.svg"></md-icon>
+               <a href="tel:{{random.contactInfoPro.fixedPhone}}" title="appeler {{random.firstName | capitalize}} sur son mobile">{{random.contactInfoPro.fixedPhone}}</a>
+            </div>
           </span>
 			  </md-card-title-text>
 			  <md-card-title-media flex="30">
@@ -31,9 +40,9 @@
 			</md-card-title>
 
 			<md-card-content>
-				  Responsable/Manager:  <a href="#/people/{{random.manager}}">{{random.manager}}</a>
+			 Manager: <a href="#/people/{{random.manager}}">{{random.manager}}</a>
           <br>
-          Localisation : <a href="http://www.sfeir.com/contact/">{{random.entity}}</a>
+          Location : <a href="http://www.sfeir.com/contact/">{{random.entity}}</a>
           <br>
           <a ng-show="random.entity == 'Sfeir-Benelux'" target="_blank" title="Le localiser" href="http://sfeirmaplux.appspot.com/#sferian/{{mySplit(random.email)}}"><md-icon md-svg-icon="img/md-map.svg"></md-icon></a>
           <a ng-show="random.entity == 'Sfeir-Paris'" target="_blank" title="Le localiser" href="http://map.sfeir.com/#sferian/{{mySplit(random.email)}}"><md-icon md-svg-icon="img/md-map.svg"></md-icon></a>
@@ -65,15 +74,15 @@
 	    </md-card-title>
 
       <md-card-content>
-		  Responsable/Manager :  <a href="#/people/{{sfeirien.manager}}">{{sfeirien.manager}}</a>
+		  Manager : <a href="#/people/{{sfeirien.manager}}">{{sfeirien.manager}}</a>
         <br>
-        Localisation : <a href="http://www.sfeir.com/contact/">{{sfeirien.entity}}</a>
+        Location : <a href="http://www.sfeir.com/contact/">{{sfeirien.entity}}</a>
       </md-card-content>
 	  </md-card>
 	</div>
   <div ng-show="filteredPeople.length <= 0 && !loading">
     <md-content>
-      <h1>Aucun sfeirien trouvé</h1>
+      <h1>No sfeirien found</h1>
     </md-content>
   </div>
 </md-content>
