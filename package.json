@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "A experimentation of PWA's with Angular 1 and Materials",
   "main": "./index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "gulp build && echo \"Moving front build to app package…\" && rm -Rf ../back/app && mv build ../back/app",
-    "postinstall": "bower install"
+  "author": {
+     "name": "Cyril Balit",
+     "email": "<balit.c@sfeir.com>"
   },
+  "contributors": [{
+    "name": "Florian Orpelière",
+    "email": "florian.orpeliere@gmail.com"
+  }],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sfeir/peoples.git"
@@ -15,11 +18,20 @@
   "keywords": [
     "PWA, service worker, angular, materials"
   ],
-  "author": "Cyril Balit <balit.c@sfeir.com>",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gulp build && echo \"Moving front build to app package…\" && rm -Rf ../back/app && mv build ../back/app"
+  },
   "bugs": {
     "url": "https://github.com/Sfeir/peoples/issues"
   },
   "homepage": "https://github.com/Sfeir/peoples#readme",
+  "dependencies": {
+    "angular-route": "^1.5.2",
+    "angular": "^1.5.2",
+    "bootstrap": "^3.3.6",
+    "angular-material": "^1.0.1"
+  },
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-all": "^1.1.0",
