@@ -1,36 +1,42 @@
-<md-card class="md-whiteframe-4dp" ng-class='{first:$first}'>
+<md-card class="md-whiteframe-4dp" ng-class="::{first:$first}">
     <md-card-title layout="row">
         <md-card-title-text layout="column" layout-align="space-around" flex="70">
             <span class="md-headline">
-               <a href="#/people/{{people.email}}">{{people.firstName | capitalize}} {{people.lastName | uppercase}}</a>
+               <a href="#/people/{{::people.email}}">{{::people.firstName | capitalize}} {{::people.lastName | uppercase}}</a>
             </span>
             <span layout="column" flex="100">
-               <div class="people-name">{{people.functionName}}</div>
+               <div class="people-name">{{::people.functionName}}</div>
                <div>
                   <md-icon md-svg-icon="img/md-email.svg"></md-icon>
-                  <a href="mailto:{{people.name}}<{{people.email}}>" title="Send email to {{people.firstName | capitalize}} {{people.lastName}}">{{people.email}}</a>
+                  <a href="mailto:{{::people.name}}<{{::people.email}}>" title="Send email to {{::people.firstName | capitalize}} {{::people.lastName}}">{{::people.email}}</a>
                </div>
-               <div ng-show="people.contactInfoPro.mobilePhone">
+               <div ng-show="::people.contactInfoPro.mobilePhone">
                   <md-icon md-svg-icon="img/md-phone.svg"></md-icon>
-                  <a href="tel:{{people.contactInfoPro.mobilePhone}}" title="call {{people.firstName | capitalize}}">{{people.contactInfoPro.mobilePhone}}</a>
+                  <a href="tel:{{::people.contactInfoPro.mobilePhone}}" title="call {{::people.firstName | capitalize}}">{{::people.contactInfoPro.mobilePhone}}</a>
                </div>
-               <div ng-show="!people.contactInfoPro.mobilePhone && people.contactInfoPro.fixedPhone">
+               <div ng-show="::(!people.contactInfoPro.mobilePhone && people.contactInfoPro.fixedPhone)">
                   <md-icon md-svg-icon="img/md-phone.svg"></md-icon>
-                  <a href="tel:{{people.contactInfoPro.fixedPhone}}" title="call {{people.firstName | capitalize}}">{{people.contactInfoPro.fixedPhone}}</a>
+                  <a href="tel:{{::people.contactInfoPro.fixedPhone}}" title="call {{::people.firstName | capitalize}}">{{::people.contactInfoPro.fixedPhone}}</a>
                </div>
             </span>
         </md-card-title-text>
         <md-card-title-media flex="30">
             <div class="card-media">
-                <a href="#/people/{{people.email}}">
-                   <img class="thumb" err-src="../img/profile.svg" ng-src="{{people.photo}}">
+                <a href="#/people/{{::people.email}}">
+                   <img class="thumb" err-src="../img/profile.svg" ng-src="{{::people.photo}}">
                 </a>
             </div>
         </md-card-title-media>
     </md-card-title>
     <md-card-content>
-        Manager :  <a href="#/people/{{people.manager}}">{{people.manager}}</a>
+        Manager :  <a href="#/people/{{::people.manager}}">{{::people.manager}}</a>
         <br>
-        Location : <a href="http://www.sfeir.com/contact/">{{people.entity}}</a>
+        Location : <a href="http://www.sfeir.com/contact/">{{::people.entity}}</a>
+        <a ng-show="::sfeirien.entity == 'Sfeir-Benelux'" target="_blank" title="Locate" href="http://sfeirmaplux.appspot.com/#sferian/{{mySplit(sfeirien.email)}}">
+           <md-icon md-svg-icon="img/md-map.svg"></md-icon>
+        </a>
+       <a ng-show="::sfeirien.entity == 'Sfeir-Paris'" target="_blank" title="Locate" href="http://map.sfeir.com/#sferian/{{mySplit(sfeirien.email)}}">
+          <md-icon md-svg-icon="img/md-map.svg"></md-icon>
+       </a>
     </md-card-content>
 </md-card>

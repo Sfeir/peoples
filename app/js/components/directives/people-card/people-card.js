@@ -8,7 +8,7 @@
     function peopleCardDirective() {
         return {
             scope: {
-                people: '='
+                people: '<'
             },
             templateUrl: './js/components/directives/people-card/people-card.html'
         };
