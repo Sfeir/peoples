@@ -24,6 +24,10 @@ label{
   padding: 0px 35px;
 }
 
+.people-name {
+   margin-bottom: 20px;
+}
+
 .thumb {
   width: 100%;
   border: 10px solid #F1F1F1;

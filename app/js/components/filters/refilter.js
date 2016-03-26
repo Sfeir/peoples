@@ -18,12 +18,12 @@
             noaccent = ['A','a','E','e','I','i','O','o','U','u','N','n','C','c'];
 
         function removeAccent(string) {
-            for (var i = 0; i < accent.length; i++){
-                if(accent[i] && noaccent[i] && (typeof string === "string")) {
+            for (var i = 0; i < accent.length; i++) {
+                if(accent[i] && noaccent[i] && (typeof string === 'string')) {
                     string = string.replace(accent[i], noaccent[i]);
                 }
             }
-            if(typeof string === "string") {
+            if (typeof string === 'string') {
                 return string.toLowerCase();
             } else {
                 return string;

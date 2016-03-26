@@ -14,10 +14,6 @@
                 controller  : 'ListController',
                 controllerAs  : 'homeCtrl'
             })
-            .when('/people/tagcloud', {
-                templateUrl : 'partials/people-tagcloud.html',
-                controller  : 'SkillCloudCtrl'
-            })
             .when('/people', {
                 templateUrl : 'js/list/list.html',
                 controller  : 'ListController',
