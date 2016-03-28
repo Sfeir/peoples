@@ -18,7 +18,7 @@
 
         function map(arr) {
             arr.forEach(function(sfeirien) {
-                sfeirien.name = `${sfeirien.firstName} ${sfeirien.lastName}`;
+                sfeirien.name = sfeirien.firstname + ' ' + sfeirien.lastname;
                 peopleMap.set(sfeirien.email, sfeirien);
             });
             return Array.from(peopleMap.values());

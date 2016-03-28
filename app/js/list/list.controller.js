@@ -5,27 +5,25 @@
         .module('peoples-list')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$scope','People','$location', '$rootScope'];
+    ListController.$inject = ['People','$location', '$rootScope'];
 
-    function ListController($scope, People, $location, $rootScope) {
-        $scope.people = [];
-        $scope.filteredPeople = [];
-        $scope.random = [];
-        $scope.loading = true;
+    function ListController(People, $location, $rootScope) {
+        var _this = this;
 
-        $scope.queryAll = '';
+        _this.people = [];
+        _this.filteredPeople = [];
+        _this.random = [];
+        _this.loading = true;
+
+        _this.queryAll = '';
 
         People.$promise.then(function(people) {
-            $scope.people = people;
-            $scope.random = $scope.people[Math.floor(Math.random() * $scope.people.length)];
-            $scope.loading = false;
+            _this.people = people;
+            _this.random = _this.people[Math.floor(Math.random() * _this.people.length)];
+            _this.loading = false;
         });
 
-        $scope.mySplit = function(string) {
-            return string ? string.split('@')[0] : '';
-        };
-
-        $scope.pressEnter = function(adr) {
+        _this.pressEnter = function(adr) {
             if (adr) {
                 $location.path('/people/' + adr);
             }

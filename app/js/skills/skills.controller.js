@@ -8,22 +8,17 @@
     SkillsController.$inject = ['$scope', 'People', '$routeParams', '$location'];
 
     function SkillsController($scope, People, $routeParams, $location) {
-        activate();
+        $scope.people = [];
+        $scope.filteredPeople = [];
+        $scope.query = $routeParams.skill;
 
-        function activate() {
-            $scope.people = [];
-            $scope.filteredPeople = [];
-            $scope.query = $routeParams.skill;
+        People.$promise.then(function(people) {
+            $scope.people = people;
+        });
 
-            People.$promise.then(function() {
-                $scope.people = People.list;
-            });
-
-            $scope.pressEnter = function(adr) {
-                $scope.query = '';
-                $location.path('/people/' + adr);
-            };
-        }
-
+        $scope.pressEnter = function(adr) {
+            $scope.query = '';
+            $location.path('/people/' + adr);
+        };
     }
 })();

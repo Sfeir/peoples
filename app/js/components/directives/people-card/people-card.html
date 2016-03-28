@@ -39,10 +39,10 @@
         Manager :  <a href="#/people/{{::people.manager}}">{{::people.manager}}</a>
         <br>
         Location : <a href="http://www.sfeir.com/contact/">{{::people.entity}}</a>
-        <a ng-show="::people.entity == 'Sfeir-Benelux'" target="_blank" title="Locate" href="http://sfeirmaplux.appspot.com/#sferian/{{::mySplit(people.email)}}">
+        <a ng-if="::people.entity == 'Sfeir-Benelux'" target="_blank" title="Locate" href="http://sfeirmaplux.appspot.com/#sferian/{{::mySplit(people.email)}}">
            <md-icon md-svg-icon="img/md-map.svg"></md-icon>
         </a>
-       <a ng-show="::people.entity == 'Sfeir-Paris'" target="_blank" title="Locate" href="http://map.sfeir.com/#sferian/{{::mySplit(people.email)}}">
+       <a ng-if="::people.entity == 'Sfeir-Paris'" target="_blank" title="Locate" href="http://map.sfeir.com/#sferian/{{::mySplit(people.email)}}">
           <md-icon md-svg-icon="img/md-map.svg"></md-icon>
        </a>
     </md-card-content>
@@ -80,7 +80,7 @@
         <md-card-icon-actions>
             <md-button target="_blank" href="https://twitter.com/{{::people.twitter}}" class="md-icon-button" aria-label="twitter">
                 <md-tooltip md-direction="top">
-                    twitter
+                    Twitter
                 </md-tooltip>
                 <md-icon md-svg-icon="img/md-twitter.svg"></md-icon>
             </md-button>

@@ -8,23 +8,14 @@
     DetailsController.$inject = ['$scope','$routeParams', '$location', 'People'];
 
     function DetailsController($scope, $routeParams, $location, People) {
-        $scope.sfeirien = {};
-        $scope.manager = {};
+        var _this = this;
 
         People.$promise.then(function() {
-            $scope.sfeirien = People.get($routeParams.id);
-            $scope.manager = People.getCollab($routeParams.id);
+            _this.sfeirien = People.get($routeParams.id);
+            _this.manager = People.getCollab($routeParams.id);
         });
 
-        $scope.mySplit = function(string) {
-            var result;
-            if (string) {
-                result = string.split('@')[0];
-            }
-            return result;
-        };
-
-        $scope.pressEnter = function(adr) {
+        _this.pressEnter = function(adr) {
             if (adr) {
                 $location.path('/people/' + adr);
             }
