@@ -5,19 +5,18 @@
         .module('peoples-skills')
         .controller('SkillsController', SkillsController);
 
-    SkillsController.$inject = ['$scope', 'People', '$routeParams', '$location'];
+    SkillsController.$inject = ['People', '$routeParams', '$location'];
 
-    function SkillsController($scope, People, $routeParams, $location) {
-        $scope.people = [];
-        $scope.filteredPeople = [];
-        $scope.query = $routeParams.skill;
+    function SkillsController(People, $routeParams, $location) {
+        var _this = this;
+        _this.query = $routeParams.skill;
 
         People.$promise.then(function(people) {
-            $scope.people = people;
+            _this.people = people;
         });
 
-        $scope.pressEnter = function(adr) {
-            $scope.query = '';
+        _this.pressEnter = function(adr) {
+            _this.query = '';
             $location.path('/people/' + adr);
         };
     }

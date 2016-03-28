@@ -1,5 +1,5 @@
 <md-content class="people-list-skill md-padding" layout="row" layout-wrap layout-align="center center">
-    <div class="people-card-list" ng-repeat="sfeirien in people | filter: {'skills': query} track by sfeirien.email" flex="100" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="25" layout="column">
+    <div class="people-card-list" ng-repeat="sfeirien in skillsCtrl.people | filter: {'skills': skillsCtrl.query} track by sfeirien.email" flex="100" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="25" layout="column">
         <md-card class="md-whiteframe-4dp">
 
             <md-card-title layout="row">
@@ -22,7 +22,7 @@
             <md-content id="skills" class="md-padding">
                 <h2>Compétences</h2>
                 <div layout="row" layout-wrap layout-align="space-around center">
-                    <md-button aria-label="skill" ng-class="skill.toLowerCase() == query.toLowerCase() ? 'skillActive' : ''"
+                    <md-button aria-label="skill" ng-class="skill.toLowerCase() == skillsCtrl.query.toLowerCase() ? 'skillActive' : ''"
                                ng-repeat="skill in sfeirien.skills track by $index" class="md-raised"
                                ng-href="#/people/skill/{{skill}}">
                         {{skill}}
