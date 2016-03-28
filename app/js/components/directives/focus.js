@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('peoples-components')
+        .module('people-components')
         .directive('focusMe', ['$timeout', focusDirective]);
 
     function focusDirective($timeout) {

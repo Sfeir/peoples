@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('peoples-components')
+        .module('people-components')
         .factory('People', ['$http', Peoples]);
 
     function Peoples($http) {

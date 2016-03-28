@@ -1,9 +1,4 @@
-<md-content scroll ng-class="{min:boolChangeClass}" class="extend-toolbar fixed" ng-class="active" layout="row" layout-align="center end">
-    <md-input-container class="md-icon-right">
-        <md-icon md-svg-icon="img/search.svg"></md-icon>
-        <input focus-me="true" ng-keyup="$event.keyCode == 13 && pressEnter(filteredPeople[0].email)" class="search-input" ng-model="query" tabindex="1" id="filter" aria-label="search">
-    </md-input-container>
-</md-content>
+<search-bar filteredPeople="filteredPeople" query="query"></search-bar>
 
 <md-content class="people-random" layout="row" layout-wrap layout-align="center center" ng-class="!query || (query.length < 1) ? 'animation-show' : 'animation-hide';">
     <div class="people-list-loading" ng-show="homeCtrl.loading" layout="row" layout-wrap layout-align="center center">
@@ -16,7 +11,7 @@
 </md-content>
 
 <md-content class="people-list md-padding" layout="row" layout-wrap layout-align="center center" ng-show="query && query.length >= 1">
-    <div class="people-card-list" ng-repeat="sfeirien in filteredPeople = (homeCtrl.people | reFilter: query)" flex="100" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="33" layout="column">
+    <div class="people-card-list" ng-repeat="sfeirien in filteredPeople = (homeCtrl.people | filter: query)" flex="100" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="33" layout="column">
         <people-card people="sfeirien" describe="false"></people-card>
     </div>
     <div ng-show="filteredPeople.length <= 0 && !loading">

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('peoples-details')
+        .module('people-details')
         .controller('DetailsController', ['$routeParams', 'People', DetailsController]);
 
     function DetailsController($routeParams, People) {

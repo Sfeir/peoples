@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('peoples-components')
+        .module('people-components')
         .directive('searchBar', ['$location', searchBarDirective]);
 
     function searchBarDirective($location) {

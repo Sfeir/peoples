@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('peoples-skills')
+        .module('people-skills')
         .controller('SkillsController', SkillsController);
 
     SkillsController.$inject = ['People', '$routeParams', '$location'];

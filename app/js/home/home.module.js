@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('people-list', []);
+        .module('people-home', []);
 })();

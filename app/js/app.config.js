@@ -2,16 +2,14 @@
     'use strict';
 
     angular
-        .module('peoplesApp')
-        .config(config);
-
-    config.$inject = ['$routeProvider'];
+        .module('peopleApp')
+        .config(['$routeProvider', config]);
 
     function config($routeProvider) {
         $routeProvider
             .when('/home', {
                 templateUrl : 'js/home/home.html',
-                controller  : 'ListController',
+                controller  : 'HomeController',
                 controllerAs  : 'homeCtrl'
             })
             .when('/people', {
