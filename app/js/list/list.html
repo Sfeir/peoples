@@ -1,12 +1,7 @@
-<md-content scroll ng-class="{min:boolChangeClass}" class="extend-toolbar fixed" ng-class="active" layout="row" layout-align="center end">
-    <md-input-container class="md-icon-right">
-        <md-icon md-svg-icon="img/search.svg"></md-icon>
-        <input focus-me="true" ng-keyup="$event.keyCode == 13 && pressEnter(filteredPeople[0].email)" class="search-input" ng-model="queryAll" tabindex="1" id="filter" aria-label="search">
-    </md-input-container>
-</md-content>
+<search-bar filteredPeople="filteredPeople" query="listCtrl.query"></search-bar>
 
 <md-content class="people-list-all md-padding" layout="row" layout-wrap layout-align="center center">
-    <div class="people-card-list" ng-repeat="sfeirien in filteredPeople = (listCtrl.people | filter: queryAll) track by sfeirien.id" flex="100" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="33" layout="column">
+    <div class="people-card-list" ng-repeat="sfeirien in filteredPeople = (listCtrl.people | filter: listCtrl.query) track by sfeirien.id" flex="100" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="33" layout="column">
         <people-card people="::sfeirien" describe="false"></people-card>
     </div>
     <div ng-show="filteredPeople.length <= 0 && !loading">
