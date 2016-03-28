@@ -1,4 +1,4 @@
-<search-bar filtered-people="filteredPeople" query="listCtrl.query"></search-bar>
+<search-bar filtered-people="filteredPeople[0]" query="listCtrl.query"></search-bar>
 
 <md-content class="people-list-all md-padding" layout="row" layout-wrap layout-align="center center">
     <div class="people-card-list" ng-repeat="sfeirien in filteredPeople = (listCtrl.people | filter: listCtrl.query) track by sfeirien.id" flex="100" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="33" layout="column">

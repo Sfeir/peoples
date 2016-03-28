@@ -12,10 +12,12 @@
 	transition: 0.3s linear all;
 	opacity: 1;
 }
+
 .people-list.ng-hide{
 	-webkit-transform: translateY(0px);
 	transform: translateY(0px);
 }
+
 .people-list:not(.ng-hide){
 	transition: 0.3s linear all;
 	-webkit-transform: translateY(-300px);

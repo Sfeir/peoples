@@ -9,6 +9,7 @@
 
     function SkillsController(People, $routeParams, $location) {
         var _this = this;
+        _this.filteredPeople = [];
         _this.query = $routeParams.skill;
 
         People.$promise.then(function(people) {
