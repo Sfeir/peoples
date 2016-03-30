@@ -3,13 +3,14 @@
 
     angular
         .module('people-components')
-        .directive('peopleCard', peopleCardDirective);
+        .directive('peopleCard', ['$routeParams', peopleCardDirective]);
 
-    function peopleCardDirective() {
+    function peopleCardDirective($routeParams) {
         return {
             scope: {
                 people: '<',
-                describe: '='
+                describe: '<',
+                skillOn: '<'
             },
             templateUrl: './js/components/directives/people-card/people-card.html',
             link : function(scope) {

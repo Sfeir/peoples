@@ -2,36 +2,6 @@
 
 <md-content class="people-list-all md-padding" layout="row" layout-wrap layout-align="center center">
     <div class="people-card-list" ng-repeat="sfeirien in filteredPeople = (skillsCtrl.people | filter: {'skills': skillsCtrl.query, 'email': skillsCtrl.name}) track by sfeirien.email" flex="100" flex-xs="100" flex-sm="50" flex-md="33" flex-gt-md="25" layout="column">
-        <md-card class="md-whiteframe-4dp">
-
-            <md-card-title layout="row">
-                <md-card-title-text layout="column" layout-align="space-around" flex="60">
-                    <span class="md-headline"><a href="#/people/{{sfeirien.email}}">{{sfeirien.firstName | capitalize}} {{sfeirien.lastName | uppercase}}</a></span>
-					<span class="md-subhead">
-            <div>{{sfeirien.functionName}}</div>
-            <div><md-icon md-svg-icon="img/md-email.svg"></md-icon> <a href="mailto:{{sfeirien.name}}<{{sfeirien.email}}>" title="écrire un courriel à {{sfeirien.firstName | capitalize}} {{sfeirien.lastName}}">{{sfeirien.email}}</a></div>
-					  <div ng-if="sfeirien.contactInfoPro.mobilePhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon> <a href="tel:{{sfeirien.contactInfoPro.mobilePhone}}" title="appeler {{sfeirien.firstName | capitalize}} sur son mobile">{{sfeirien.contactInfoPro.mobilePhone}}</a></div>
-            <div ng-if="!sfeirien.contactInfoPro.mobilePhone && sfeirien.contactInfoPro.fixedPhone"><md-icon md-svg-icon="img/md-phone.svg"></md-icon><a href="tel:{{sfeirien.contactInfoPro.fixedPhone}}" title="appeler {{sfeirien.firstName | capitalize}} sur son mobile">{{sfeirien.contactInfoPro.fixedPhone}}</a></div>
-          </span>
-                </md-card-title-text>
-                <md-card-title-media flex="40">
-                    <div class="card-media">
-                        <a href="#/people/{{sfeirien.email}}"><img class="thumb" err-src="../img/profile.svg" ng-src="{{sfeirien.photo}}"></a>
-                    </div>
-                </md-card-title-media>
-            </md-card-title>
-
-            <md-content id="skills" class="md-padding">
-                <h2>Compétences</h2>
-                <div layout="row" layout-wrap layout-align="space-around center">
-                    <md-button aria-label="skill" ng-class="skill.toLowerCase() == skillsCtrl.query.toLowerCase() ? 'skillActive' : ''"
-                               ng-repeat="skill in sfeirien.skills track by $index" class="md-raised"
-                               ng-href="#/people/skill/{{skill}}">
-                        {{skill}}
-                    </md-button>
-                </div>
-            </md-content>
-
-        </md-card>
+      <people-card people="::sfeirien" skill-on="skillsCtrl.query"></people-card>
     </div>
 </md-content>

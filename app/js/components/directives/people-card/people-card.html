@@ -35,6 +35,17 @@
         </md-card-title-media>
     </md-card-title>
 
+    <md-content ng-if="::(skillOn)" id="skills" class="md-padding">
+        <h2>Skills</h2>
+        <div layout="row" layout-wrap layout-align="space-around center">
+            <md-button aria-label="skill" ng-class="skill.toLowerCase() == skillOn.toLowerCase() ? 'skillActive' : ''"
+                       ng-repeat="skill in people.skills track by $index" class="md-raised"
+                       ng-href="#/people/skill/{{skill}}">
+                {{skill}}
+            </md-button>
+        </div>
+    </md-content>
+
     <md-card-content>
         Manager :  <span>{{::people.manager}}</span>
         <br>
