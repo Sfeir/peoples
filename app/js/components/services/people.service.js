@@ -7,24 +7,22 @@
 
     function Peoples($http) {
         var peopleMap = new Map();
-        var data = localStorage.getItem('people');
         var promise = $http.get('/mocks/people.json')
             .then(response => {
-                localStorage.setItem('people', JSON.stringify(response.data));
                 return Promise.resolve(response.data);
-            }, function() {
-                return data;
             });
 
         function map(arr) {
+
             arr.forEach(function(sfeirien) {
                 sfeirien.name = sfeirien.firstname + ' ' + sfeirien.lastname;
                 peopleMap.set(sfeirien.email, sfeirien);
             });
-            return Array.from(peopleMap.values());
+
+            return arr;
         }
 
-        var r = {
+        var service = {
             $promise: promise.then(map),
             map: peopleMap,
             get: peopleMap.get.bind(peopleMap),
@@ -60,7 +58,7 @@
             }
         };
 
-        return r;
+        return service;
     }
 
 })();
