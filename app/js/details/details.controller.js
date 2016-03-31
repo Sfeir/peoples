@@ -2,35 +2,15 @@
     'use strict';
 
     angular
-        .module('peoples-details')
-        .controller('DetailsController', DetailsController);
+        .module('people-details')
+        .controller('DetailsController', ['$routeParams', 'People', DetailsController]);
 
-    DetailsController.$inject = ['$scope','$routeParams', 'People'];
+    function DetailsController($routeParams, People) {
+        var _this = this;
 
-    function DetailsController($scope, $routeParams, People) {
-        var vm = this;
-
-        activate();
-
-        function activate() {
-            $scope.sfeirien = {};
-            $scope.manager = {};
-
-            People.$promise.then(function (){
-                $scope.sfeirien = People.get($routeParams.id);
-                $scope.manager = People.getCollab($routeParams.id);
-            });
-            $scope.mySplit = function(string) {
-                if(string == undefined)
-                    return;
-                var array = string.split('@');
-                return array[0];
-            };
-            $scope.pressEnter = function(adr){
-                $rootScope.search = adr;
-                $location.path('/people/all');
-            };
-        }
-
+        People.$promise.then(function() {
+            _this.sfeirien = People.get($routeParams.id);
+            _this.manager = People.getCollab($routeParams.id);
+        });
     }
 })();

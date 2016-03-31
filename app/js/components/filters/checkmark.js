@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('peoples-components')
+        .module('people-components')
         .filter('checkmark', checkMarkFilter);
 
     function checkMarkFilter() {

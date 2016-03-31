@@ -2,10 +2,8 @@
     'use strict';
 
     angular
-        .module('peoplesApp')
-        .config(config);
-
-    config.$inject = ['$routeProvider'];
+        .module('peopleApp')
+        .config(['$routeProvider', config]);
 
     function config($routeProvider) {
         $routeProvider
@@ -13,13 +11,6 @@
                 templateUrl : 'js/home/home.html',
                 controller  : 'HomeController',
                 controllerAs  : 'homeCtrl'
-            })
-            .when('/people/tagcloud', {
-                templateUrl : 'partials/people-tagcloud.html',
-                controller  : 'SkillCloudCtrl'
-            })
-            .when('/people/all', {
-                redirectTo : '/people'
             })
             .when('/people', {
                 templateUrl : 'js/list/list.html',

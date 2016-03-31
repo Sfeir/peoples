@@ -2,6 +2,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var all = require('gulp-all');
+var eslint = require('gulp-eslint');
 var inlineAngularTemplates = require('gulp-inline-angular-templates');
 var htmlreplace = require('gulp-html-replace');
 var watch = require('gulp-watch');
@@ -42,21 +43,21 @@ gulp.task("build", function build() {
     gulp.src('app/js/d3/*.js')
       .pipe(gulp.dest('build/js/d3/')),
 
-    gulp.src(['app/bower_components/angular/angular.min.js',
-          'app/bower_components/angular-route/angular-route.min.js',
-          'app/bower_components/angular-animate/angular-animate.min.js',
-          'app/bower_components/angular-aria/angular-aria.min.js',
-          'app/bower_components/angular-messages/angular-messages.min.js',
-          'app/bower_components/angular-material/angular-material.min.js'])
+    gulp.src(['node_modules/angular/angular.min.js',
+          'node_modules/angular-route/angular-route.min.js',
+          'node_modules/angular-animate/angular-animate.min.js',
+          'node_modules/angular-aria/angular-aria.min.js',
+          'node_modules/angular-messages/angular-messages.min.js',
+          'node_modules/angular-material/angular-material.min.js'])
       .pipe(concat("vendor.js"))
       .pipe(gulp.dest('build/js/')),
 
-    gulp.src(['app/bower_components/bootstrap/dist/css/bootstrap.min.css',
-             'app/bower_components/angular-material/angular-material.css'])
+    gulp.src(['node_modules/bootstrap/dist/css/bootstrap.min.css',
+             'node_modules/angular-material/angular-material.css'])
       .pipe(concat("vendor.css"))
       .pipe(gulp.dest('build/css/')),
 
-    gulp.src('app/bower_components/bootstrap/dist/fonts/*')
+    gulp.src('node_modules/bootstrap/dist/fonts/*')
       .pipe(gulp.dest('build/fonts/')),
 
     gulp.src('app/img/*')
@@ -65,6 +66,12 @@ gulp.task("build", function build() {
     gulp.src('favicon.ico')
       .pipe(gulp.dest('build/'))
     ])
+});
+
+gulp.task('eslint', function() {
+  return gulp.src('app/js/**/*.js')
+      .pipe(eslint())
+      .pipe(eslint.format());
 });
 
 gulp.task('watch', function () {
@@ -76,7 +83,7 @@ gulp.task('watch', function () {
 
 gulp.task('connect', function() {
   connect.server({
-      root: 'app'
+      root: ['app', 'node_modules']
   });
 });
 

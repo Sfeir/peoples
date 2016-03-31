@@ -2,79 +2,63 @@
     'use strict';
 
     angular
-        .module('peoples-components')
-        .factory('People', Peoples);
-
-    Peoples.$inject = ['$http'];
+        .module('people-components')
+        .factory('People', ['$http', Peoples]);
 
     function Peoples($http) {
-        var m = new Map();
-        var data = localStorage.getItem("people");
+        var peopleMap = new Map();
         var promise = $http.get('/mocks/people.json')
-            .then(function (response){
-                localStorage.setItem("people", JSON.stringify(response.data));
+            .then(response => {
                 return Promise.resolve(response.data);
-            }, function(){
-                return data;
             });
 
-        function map(arr)
-        {
-            for(var sfeirien of arr)
-                m.set(sfeirien.email, new Sfeirien(sfeirien));
-            return Promise.resolve(m);
+        function map(arr) {
+
+            arr.forEach(function(sfeirien) {
+                sfeirien.name = sfeirien.firstname + ' ' + sfeirien.lastname;
+                peopleMap.set(sfeirien.email, sfeirien);
+            });
+
+            return arr;
         }
 
-        var r = {
+        var service = {
             $promise: promise.then(map),
-            map: m,
-            get: m.get.bind(m),
-            getCollab: function(email){
+            map: peopleMap,
+            get: peopleMap.get.bind(peopleMap),
+            getCollab: function(email) {
                 var response = {isManager: false, collab: []};
-                angular.forEach(m, function(value, key){
-                    if(value.manager === email){
+
+                angular.forEach(peopleMap, function(value, key) {
+                    if (value.manager === email) {
                         response.isManager = true;
                         response.collab.push(key);
                     }
                 }, response);
+
                 return response;
             },
-            getSkills: function(){
+            getSkills: function() {
                 var skills = [];
                 var test = {};
 
-                // taille des mots soit inversement proportionnelle à la taille totale du tableau.
-                angular.forEach(m, function(value, key){
-                    angular.forEach(value.skills, function(value, key){
+                angular.forEach(peopleMap, function(value, key) {
+                    angular.forEach(value.skills, function(value, key) {
                         if (value) {
                             test[value] = (test[value] || 0) + 20;
                         }
                     }, skills);
                 }, skills);
-                angular.forEach(test, function(value, key){
+
+                angular.forEach(test, function(value, key) {
                     skills.push({size: value, text: key});
                 });
+
                 return skills;
             }
         };
 
-        Object.defineProperty(r, "list", {
-            get: function (){ return Array.from(m.values()); }
-        });
-
-        return r;
-
+        return service;
     }
-
-    function Sfeirien(data)
-    {
-        if(typeof data === "object") Object.assign(this, data);
-    }
-
-    Object.defineProperties(Sfeirien.prototype, {
-        name: {
-            get: function (){ return `${this.firstName} ${this.lastName}`; }
-        }
-    });
 
 })();

@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('peoples-components', []);
+        .module('people-components', []);
 })();

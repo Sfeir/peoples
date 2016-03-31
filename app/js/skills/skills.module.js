@@ -2,5 +2,5 @@
     'use strict';
 
     angular
-        .module('peoples-skills', []);
+        .module('people-skills', []);
 })();

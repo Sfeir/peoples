@@ -1,0 +1,118 @@
+<md-card class="md-whiteframe-4dp">
+
+    <md-card-title layout="row">
+        <md-card-title-text ng-class="::{'first-info-people': describe}" layout="{{:: describe ? 'row': 'column'}}" layout-align="space-around">
+            <span flex="75">
+              <span class="md-headline">
+                 <a href="#/people/{{::people.email}}">{{::(people.firstname | capitalize)}} {{::(people.lastname | uppercase)}}</a>
+              </span>
+              <span layout="column" class="layout-column" flex="100">
+                 <div class="people-name">{{::people.functionName}}</div>
+                 <div>
+                    <md-icon md-svg-icon="img/md-email.svg"></md-icon>
+                    <a href="mailto:{{::people.name}}<{{::people.email}}>">{{::people.email}}</a>
+                 </div>
+                 <div ng-if="::people.contactInfoPro.mobilePhone">
+                    <md-icon md-svg-icon="img/md-phone.svg"></md-icon>
+                    <a href="tel:{{::people.contactInfoPro.mobilePhone}}">{{::people.contactInfoPro.mobilePhone}}</a>
+                 </div>
+                 <div ng-if="::(!people.contactInfoPro.mobilePhone && people.contactInfoPro.fixedPhone)">
+                    <md-icon md-svg-icon="img/md-phone.svg"></md-icon>
+                    <a href="tel:{{::people.contactInfoPro.fixedPhone}}">{{::people.contactInfoPro.fixedPhone}}</a>
+                 </div>
+              </span>
+            </span>
+            <div ng-if="::describe" flex class="img-circle">
+                <img class="thumb" err-src="../img/profile.svg" ng-src="{{::people.photo}}" alt="image profile" />
+            </div>
+        </md-card-title-text>
+        <md-card-title-media ng-if="::!describe" flex="30">
+            <div class="card-media">
+                <a href="#/people/{{::people.email}}">
+                   <img class="thumb" err-src="../img/profile.svg" ng-src="{{::people.photo}}">
+                </a>
+            </div>
+        </md-card-title-media>
+    </md-card-title>
+
+    <md-content ng-if="::(skillOn)" id="skills" class="md-padding">
+        <h2>Skills</h2>
+        <div layout="row" layout-wrap layout-align="space-around center">
+            <md-button aria-label="skill" ng-class="skill.toLowerCase() == skillOn.toLowerCase() ? 'skillActive' : ''"
+                       ng-repeat="skill in people.skills track by $index" class="md-raised"
+                       ng-href="#/people/skill/{{skill}}">
+                {{skill}}
+            </md-button>
+        </div>
+    </md-content>
+
+    <md-card-content>
+        Manager :  <span>{{::people.manager}}</span>
+        <br>
+        Location : <a href="http://www.sfeir.com/contact/">{{::people.entity}}</a>
+        <a ng-if="::people.entity == 'Sfeir-Benelux'" target="_blank" title="Locate" href="http://sfeirmaplux.appspot.com/#sferian/{{::mySplit(people.email)}}">
+           <md-icon md-svg-icon="img/md-map.svg"></md-icon>
+        </a>
+       <a ng-if="::people.entity == 'Sfeir-Paris'" target="_blank" title="Locate" href="http://map.sfeir.com/#sferian/{{::mySplit(people.email)}}">
+          <md-icon md-svg-icon="img/md-map.svg"></md-icon>
+       </a>
+    </md-card-content>
+
+    <md-tabs ng-if="::describe" md-dynamic-height md-border-bottom class="tab-information">
+        <md-tab label="Organisation">
+            <md-content class="md-padding">
+                <ul>
+                    <li>{{::people.functionName}}</li>
+                    <li><br/>{{::people.functionDescription || "-"}}</li>
+                </ul>
+                <ul>
+                    <li>Current customer</li>
+                    <li>{{::people.currentClient || "—"}}</li>
+                </ul>
+                <h3 ng-show="::people.skills[0] != ''">Skills</h3>
+                <div layout="row" layout-wrap layout-align="space-around center">
+                    <md-button aria-label="skill" ng-show="::skill" class="md-raised" ng-repeat="skill in ::people.skills track by $index" ng-href="#/people/skill/{{::skill}}">{{::skill}}</md-button>
+                </div>
+            </md-content>
+        </md-tab>
+
+        <md-tab ng-disabled="::manager.isManager ? false : true" label="Collaborateurs">
+            <md-content id="skills" class="md-padding">
+                <div layout="row" layout-wrap layout-align="space-around center">
+                    <p ng-repeat="collab in ::manager.collab">
+                      <a ng-href="#/people/{{::collab}}">{{::collab}}</a>
+                    </p>
+                </div>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+
+    <md-card-footer ng-if="::describe" class="information-footer" layout="row" layout-wrap layout-align="center center">
+        <md-card-icon-actions>
+            <md-button target="_blank" href="https://twitter.com/{{::people.twitter}}" class="md-icon-button" aria-label="twitter">
+                <md-tooltip md-direction="top">
+                    Twitter
+                </md-tooltip>
+                <md-icon md-svg-icon="img/md-twitter.svg"></md-icon>
+            </md-button>
+            <md-button target="_blank" href="https://sfeirgroup.slack.com/messages/@{{::people.slack}}/" class="md-icon-button" aria-label="slack">
+                <md-tooltip md-direction="top">
+                    Slack
+                </md-tooltip>
+                <md-icon md-svg-icon="img/md-slack.svg"></md-icon>
+            </md-button>
+            <md-button target="_blank" href="https://github.com/{{::people.github}}" class="md-icon-button" aria-label="github">
+                <md-tooltip md-direction="top">
+                    GitHub
+                </md-tooltip>
+                <md-icon md-svg-icon="img/md-github.svg"></md-icon>
+            </md-button>
+            <md-button target="_blank" href="{{::people.linkedIn}}" class="md-icon-button" aria-label="linkedin">
+                <md-tooltip md-direction="top">
+                    Linkedin
+                </md-tooltip>
+                <md-icon md-svg-icon="img/md-linkedin.svg"></md-icon>
+            </md-button>
+        </md-card-icon-actions>
+    </md-card-footer>
+</md-card>

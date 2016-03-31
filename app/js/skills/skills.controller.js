@@ -2,30 +2,23 @@
     'use strict';
 
     angular
-        .module('peoples-skills')
+        .module('people-skills')
         .controller('SkillsController', SkillsController);
 
-    SkillsController.$inject = ['$scope', 'People', '$routeParams', '$location'];
+    SkillsController.$inject = ['People', '$routeParams', '$location'];
 
-    function SkillsController($scope, People, $routeParams, $location) {
-        var vm = this;
+    function SkillsController(People, $routeParams, $location) {
+        var _this = this;
+        _this.filteredPeople = [];
+        _this.query = $routeParams.skill;
 
-        activate();
+        People.$promise.then(function(people) {
+            _this.people = people;
+        });
 
-        function activate() {
-            $scope.people = [];
-            $scope.filteredPeople = [];
-            $scope.query = $routeParams.skill;
-
-            People.$promise.then(function (){
-                $scope.people = People.list;
-            });
-
-            $scope.pressEnter = function(adr){
-                $scope.query = "";
-                $location.path('/people/' + adr);
-            };
-        }
-
+        _this.pressEnter = function(adr) {
+            _this.query = '';
+            $location.path('/people/' + adr);
+        };
     }
 })();

@@ -1,17 +1,15 @@
 (function() {
     'use strict';
 
-    angular.module('peoplesApp', [
+    angular.module('peopleApp', [
         'ngRoute',
         'ngAnimate',
         'ngMessages',
         'ngMaterial',
-        'peoples-components',
-        'peoples-home',
-        'peoples-list',
-        'peoples-details',
-        'peoples-skills'
-    ])
+        'people-home',
+        'people-components',
+        'people-list',
+        'people-details',
+        'people-skills'
+    ]);
 })();
-
-

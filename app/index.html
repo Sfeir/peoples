@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="fr" ng-app="peoplesApp">
+<html lang="en" ng-app="peopleApp">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sfeir People</title>
   <!-- build:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/animation.css">
   <link rel="stylesheet" href="css/md-overwrite.css">
-  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+  <link rel="stylesheet" href="angular-material/angular-material.css">
   <!-- endbuild -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
   <meta name="theme-color" content="#020307">
@@ -18,37 +18,36 @@
 <body>
 
   <header>
-    <md-toolbar class="toolbar" ng-controller="PeopleToolBar">
+    <md-toolbar class="toolbar">
         <div class="md-toolbar-tools">
-          <a href="#/people" class="toolbar-menu" layout="row" layout-align="center center">
+          <a href="#/home" class="toolbar-menu" layout="row" layout-align="center center">
             <img src="img/logo-sfeir.svg" aria-label="sfeir" alt="Sfeir">
           </a>
           <span flex=""></span>
-          <!-- <a href="#/people/tagcloud" class="toolbar-menu" layout="row" layout-align="center center"><h1>TagCloud</h1></a> -->
-          <a href="https://goo.gl/forms/AXnyDmCNTB" class="toolbar-menu" layout="row" layout-align="center center" target="_blank"><h1>Mes infos</h1></a>
-          <a href="#/people/all" class="toolbar-menu" layout="row" layout-align="center center"><h1>People</h1></a>
+          <a href="#/people" class="toolbar-menu" layout="row" layout-align="center center"><h1>People</h1></a>
         </div>
     </md-toolbar>
   </header>
 
   <main class="view-container">
+
     <div ng-view autoscroll="true" class="view-frame view-animate"></div>
   </main>
 
   <!-- build:js -->
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
-  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-  <script src="bower_components/angular-aria/angular-aria.min.js"></script>
-  <script src="bower_components/angular-messages/angular-messages.min.js"></script>
-  <script src="bower_components/angular-material/angular-material.min.js"></script>
+  <script src="angular/angular.min.js"></script>
+  <script src="angular-route/angular-route.min.js"></script>
+  <script src="angular-animate/angular-animate.min.js"></script>
+  <script src="angular-aria/angular-aria.min.js"></script>
+  <script src="angular-messages/angular-messages.min.js"></script>
+  <script src="angular-material/angular-material.min.js"></script>
 
   <script src="js/app.module.js"></script>
   <script src="js/app.config.js"></script>
-  <script src="js/home/home.module.js"></script>
-  <script src="js/home/home.controller.js"></script>
   <script src="js/list/list.module.js"></script>
   <script src="js/list/list.controller.js"></script>
+  <script src="js/home/home.module.js"></script>
+  <script src="js/home/home.controller.js"></script>
   <script src="js/details/details.module.js"></script>
   <script src="js/details/details.controller.js"></script>
   <script src="js/skills/skills.module.js"></script>
@@ -57,15 +56,12 @@
   <script src="js/components/services/people.service.js"></script>
   <script src="js/components/filters/capitalize.js"></script>
   <script src="js/components/filters/checkmark.js"></script>
-  <script src="js/components/filters/refilter.js"></script>
   <script src="js/components/directives/scroll.js"></script>
   <script src="js/components/directives/errSrc.js"></script>
   <script src="js/components/directives/focus.js"></script>
-  <script src="js/toolbar/toolbar.controller.js"></script>
-
-
+  <script src="js/components/directives/people-card/people-card.js"></script>
+  <script src="js/components/directives/search-bar/search-bar.js"></script>
   <!-- endbuild -->
-  <script src="js/d3/d3.v3.min.js"></script>
-  <script src="js/d3/d3.layout.cloud.js"></script>
+
 </body>
 </html>

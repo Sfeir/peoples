@@ -2,43 +2,19 @@
     'use strict';
 
     angular
-        .module('peoples-list')
-        .controller('ListController', ListController);
+        .module('people-list')
+        .controller('ListController', ['People', ListController]);
 
-    ListController.$inject = ['$scope','People','$location', '$rootScope'];
+    function ListController(People) {
+        var _this = this;
 
-    function ListController($scope, People, $location, $rootScope) {
-        var vm = this;
+        _this.filteredPeople = [];
+        _this.loading = true;
+        _this.query = '';
 
-        activate();
-
-        function activate() {
-            $scope.people = [];
-            $scope.filteredPeople = [];
-            $scope.random = [];
-            $scope.loading = true;
-
-            $scope.queryAll = $rootScope.search || "";
-
-            People.$promise.then(function (){
-                $scope.people = People.list;
-                $scope.random = $scope.people[Math.floor(Math.random() * ($scope.people.length))];
-                $scope.loading = false;
-            });
-
-            $scope.mySplit = function(string) {
-                if(string == undefined)
-                    return;
-                var array = string.split('@');
-                return array[0];
-            };
-
-            $scope.pressEnter = function(adr){
-                if(adr){
-                    $location.path('/people/' + adr);
-                }
-            };
-        }
-
+        People.$promise.then(function(people) {
+            _this.people = people;
+            _this.loading = false;
+        });
     }
 })();
