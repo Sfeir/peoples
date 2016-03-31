@@ -8,7 +8,7 @@
     function Peoples($http) {
         var peopleMap = new Map();
         var promise = $http.get('/mocks/people.json')
-            .then(response => {
+            .then(function(response){
                 return Promise.resolve(response.data);
             });
 
