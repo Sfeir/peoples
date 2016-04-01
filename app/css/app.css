@@ -163,17 +163,24 @@ section > h1 {
   position: fixed !important;
 }
 
-.extend-toolbar{
-  background: url('/img/bg_left.png') no-repeat left,
-              url('/img/bg_right.png') no-repeat right;
-
-  top: 0px;
+.extend-toolbar, .search-toolbar{
+  top: 0;
   height: 200px;
+  width: 100%;
+}
+
+.search-toolbar{
+  background-color: transparent;
+}
+
+.extend-toolbar{
+  background: url('/img/bg_left.png') no-repeat left, url('/img/bg_right.png') no-repeat right;
   background-color: #0168AB;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-  width: 100%;
   z-index: 1;
 }
+
+
 .min.extend-toolbar{
     height: 150px;
 }
@@ -182,22 +189,8 @@ section > h1 {
   height: 200px;
 }
 
-md-content.people-list-all{
-  padding-top: 210px;
-}
-
-md-content.people-list-skill, md-content.people-tag-cloud{
-  padding-top: 75px;
-}
-
-.people-random{
-  padding-top: 200px;
-}
 .people-random h1{
   text-align: center;
-}
-.md-padding.people-detail{
-  margin-top: -50px;
 }
 
 /* PEOPLE INFO */
