@@ -29,11 +29,17 @@
           <a href="#/people" class="toolbar-menu" layout="row" layout-align="center center"><h1>People</h1></a>
         </div>
     </md-toolbar>
+      <section id="shellToolbar" class="extend-toolbar">
+
+      </section>
   </header>
 
-  <main class="view-container">
+
+<main class="view-container">
     <div ng-view autoscroll="true" class="view-frame view-animate"></div>
-  </main>
+</main>
+
+  <script src="js/initSw.js"></script>
 
   <!-- build:js(node_modules) js/vendor.js-->
   <script src="angular/angular.min.js"></script>
@@ -65,6 +71,5 @@
   <script src="js/components/directives/people-card/people-card.js"></script>
   <script src="js/components/directives/search-bar/search-bar.js"></script>
   <!-- endbuild -->
-
 </body>
 </html>
