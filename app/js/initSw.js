@@ -6,8 +6,28 @@
         navigator.serviceWorker
             //.register('/swTest.js')
             .register('/service-worker.js')
-            .then(function() {
+            .then(function(reg) {
                 console.log('Service Worker Registered');
+                reg.pushManager.subscribe({
+                    userVisibleOnly: true
+                }).then(function(sub) {
+                    console.log('endpoint:', sub.endpoint);
+                });
+
+                /*
+
+                TO SEND NOTIFICATIONS
+                 $ api_key=AIzaSyAuGNwSoPKtfo7ndaXd_gCx4jMMgRCji2A
+                 $ curl --header "Authorization: key=$api_key" \
+                 --header Content-Type:"application/json" \
+                 https://gcm-http.googleapis.com/gcm/send \
+                 -d "{\"registration_ids\":[\"XXXXX\"]}"
+
+                   where XXXX is the id endpoint
+
+
+                 */
+
             });
 
 

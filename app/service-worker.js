@@ -115,6 +115,72 @@ self.addEventListener('fetch', function(e) {
 });
 
 
+self.addEventListener('push', function(event) {
+    console.log('Received a push message', event);
+    event.waitUntil(
+        fetch('/mocks/notification.json')
+            .then(function(resp) {
+                return resp.json();
+            })
+            .then(function(data) {
+                var title = 'Hey look who just join the team';
+                var body  = 'Hi from ' + data.firstname + ' ' + data.lastname;
+                var icon  = data.photo;
+                var tag   = data.email;
+
+
+                self.registration.showNotification(title, {
+                    body : body,
+                    icon : icon,
+                    tag  : tag,
+                    actions: [
+                        {action: 'open', title: 'Show me more details'},
+                        {action: 'no', title: 'No thanks'}
+                    ]
+
+                })
+            })
+    );
+
+
+    /*var title = 'Yay a message.';
+     var body  = 'We have received a push message.';
+     var icon  = '/images/icon-192x192.png';
+     var tag   = 'simple-push-demo-notification-tag';
+
+     event.waitUntil(
+     self.registration.showNotification(title, {
+     body : body,
+     icon : icon,
+     tag  : tag
+     })
+     );*/
+});
+
+self.addEventListener('notificationclick', function(event) {
+    console.log('Notification click: tag ', event.notification.tag);
+    event.notification.close();
+    if (event.action === 'open') {
+        var url = 'http://localhost:8080/#/people/'+event.notification.tag;
+        event.waitUntil(
+            clients.matchAll({
+                    type : 'window'
+                })
+                .then(function(windowClients) {
+                    for (var i = 0; i < windowClients.length; i++) {
+                        var client = windowClients[i];
+                        if (client.url === url && 'focus' in client) {
+                            return client.focus();
+                        }
+                    }
+                    if (clients.openWindow) {
+                        return clients.openWindow(url);
+                    }
+                })
+        );
+    }
+});
+
 function handleUserPictureRequest(event) {
     return caches.match(event.request).then(function(response) {
         if (response) {
