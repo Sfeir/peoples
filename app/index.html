@@ -19,20 +19,22 @@
 </head>
 <body>
 
-  <header>
+<header>
     <md-toolbar class="toolbar">
         <div class="md-toolbar-tools">
-          <a href="#/home" class="toolbar-menu" layout="row" layout-align="center center">
-            <img src="img/logo-sfeir.svg" aria-label="sfeir" alt="Sfeir">
-          </a>
-          <span flex=""></span>
-          <a href="#/people" class="toolbar-menu" layout="row" layout-align="center center"><h1>People</h1></a>
+            <a href="#/home" class="toolbar-menu" layout="row" layout-align="center center">
+                <img src="img/logo-sfeir.svg" aria-label="sfeir" alt="Sfeir">
+            </a>
+            <span flex=""></span>
+            <a href="#/people" class="toolbar-menu" layout="row" layout-align="center center"><h1>People</h1></a>
         </div>
     </md-toolbar>
-      <section id="shellToolbar" class="extend-toolbar">
-
-      </section>
-  </header>
+    <section id="shellToolbar" class="extend-toolbar">
+        <md-button id="installButton" class="md-fab md-primary md-install" aria-label="Install app">
+            <md-icon md-svg-src="img/md-install.svg"></md-icon>
+        </md-button>
+    </section>
+</header>
 
 
 <main class="view-container">
@@ -50,6 +52,7 @@
   <script src="angular-material/angular-material.min.js"></script>
   <!-- endbuild -->
 
+<<<<<<< HEAD
   <!-- build:jsapp js/app.js-->
   <script src="js/app.module.js"></script>
   <script src="js/app.config.js"></script>
@@ -71,5 +74,48 @@
   <script src="js/components/directives/people-card/people-card.js"></script>
   <script src="js/components/directives/search-bar/search-bar.js"></script>
   <!-- endbuild -->
+||||||| merged common ancestors
+  <script src="js/app.module.js"></script>
+  <script src="js/app.config.js"></script>
+  <script src="js/list/list.module.js"></script>
+  <script src="js/list/list.controller.js"></script>
+  <script src="js/home/home.module.js"></script>
+  <script src="js/home/home.controller.js"></script>
+  <script src="js/details/details.module.js"></script>
+  <script src="js/details/details.controller.js"></script>
+  <script src="js/skills/skills.module.js"></script>
+  <script src="js/skills/skills.controller.js"></script>
+  <script src="js/components/components.module.js"></script>
+  <script src="js/components/services/people.service.js"></script>
+  <script src="js/components/filters/capitalize.js"></script>
+  <script src="js/components/filters/checkmark.js"></script>
+  <script src="js/components/directives/scroll.js"></script>
+  <script src="js/components/directives/errSrc.js"></script>
+  <script src="js/components/directives/focus.js"></script>
+  <script src="js/components/directives/people-card/people-card.js"></script>
+  <script src="js/components/directives/search-bar/search-bar.js"></script>
+  <!-- endbuild -->
+=======
+<script src="js/app.module.js"></script>
+<script src="js/app.config.js"></script>
+<script src="js/list/list.module.js"></script>
+<script src="js/list/list.controller.js"></script>
+<script src="js/home/home.module.js"></script>
+<script src="js/home/home.controller.js"></script>
+<script src="js/details/details.module.js"></script>
+<script src="js/details/details.controller.js"></script>
+<script src="js/skills/skills.module.js"></script>
+<script src="js/skills/skills.controller.js"></script>
+<script src="js/components/components.module.js"></script>
+<script src="js/components/services/people.service.js"></script>
+<script src="js/components/filters/capitalize.js"></script>
+<script src="js/components/filters/checkmark.js"></script>
+<script src="js/components/directives/scroll.js"></script>
+<script src="js/components/directives/errSrc.js"></script>
+<script src="js/components/directives/focus.js"></script>
+<script src="js/components/directives/people-card/people-card.js"></script>
+<script src="js/components/directives/search-bar/search-bar.js"></script>
+<!-- endbuild -->
+>>>>>>> add banner request flow
 </body>
 </html>

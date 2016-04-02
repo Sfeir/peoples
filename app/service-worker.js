@@ -16,7 +16,6 @@ var filesToCache = [
     "/angular-aria/angular-aria.min.js",
     "/angular-messages/angular-messages.min.js",
     "/angular-material/angular-material.min.js",
-    "/js/initSw.js",
     "/js/app.module.js",
     "/js/app.config.js",
     "/js/list/list.module.js",
