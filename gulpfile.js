@@ -4,7 +4,9 @@ var rev = require('gulp-rev');
 var usemin = require('gulp-usemin');
 var connect = require('gulp-connect');
 var replace = require('gulp-replace');
+var ghPages = require('gulp-gh-pages');
 var del = require('del');
+
 
 gulp.task('copy', ['clean'], function build() {
     gulp.src('node_modules/bootstrap/dist/fonts/*')
@@ -36,7 +38,7 @@ gulp.task('watch', function() {
 gulp.task('usemin', ['clean'], function() {
     return gulp.src('app/index.html')
       .pipe(usemin({
-          css: ['concat', function(){return rev();}],
+          css: ['concat', function() { return rev(); }],
           js: ['concat', replace(/templateUrl:\s*\'\.\/js\/components\/directives(.*)\'/, "templateUrl: './templates$1'"), rev()],
           jsapp: ['concat', replace(/templateUrl:\s*\'\.\/js(.*)\'/g, "templateUrl: './templates$1'"), rev()]
       }))
@@ -47,6 +49,10 @@ gulp.task('connect', function() {
     connect.server({
         root: ['app', 'node_modules']
     });
+});
+
+gulp.task('gh-pages', ['copy', 'usemin'], function() {
+    return gulp.src('./build/**/*').pipe(ghPages({force: true}));
 });
 
 gulp.task('connect-build', ['clean', 'usemin'], function() {
@@ -61,5 +67,4 @@ gulp.task('clean', function(cb) {
 
 gulp.task('default', ['connect']);
 gulp.task('sw-ready', ['connect-build', 'copy', 'usemin']);
-gulp.task('build', ['connect', 'watch']);
-gulp.task('deploy', ['build', 'gh-pages']);
+gulp.task('deploy', ['gh-pages']);
