@@ -241,3 +241,20 @@ section > h1 {
 .md-fab.md-install.show{
   display: block;
 }
+
+/* SUBSCRIPTION */
+#subscribeButton {
+  display: none; !important;
+}
+
+#subscribeButton.show{
+  display: block;
+}
+
+#subscribeButton.show .unsubscribe, #subscribeButton.show.subscribe .subscribe{
+  display: none; !important;
+}
+
+#subscribeButton.show .subscribe, #subscribeButton.show.subscribe .unsubscribe{
+  display: block;
+}
