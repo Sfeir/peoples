@@ -174,7 +174,7 @@ section > h1 {
 }
 
 .extend-toolbar{
-  background: url('/img/bg_left.png') no-repeat left, url('/img/bg_right.png') no-repeat right;
+  background: url('../img/bg_left.png') no-repeat left, url('../img/bg_right.png') no-repeat right;
   background-color: #0168AB;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   z-index: 1;
