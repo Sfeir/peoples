@@ -209,14 +209,7 @@ function handleUserPictureRequest(event) {
       if (response) {
         return response;
       }
-      var fetchReq = event.request.clone();
-      return fetch(fetchReq).then(function (response) {
-        const respClone = response.clone();
-        caches.open(staticCacheName).then(function (cache) {
-          cache.put(event.request, respClone);
-        });
-        return response;
-      });
+      return fetchAndCache(event.request,staticCacheName);
     })
     .catch(function () {
       console.log('PICTURE FETCH ERROR');
@@ -224,20 +217,23 @@ function handleUserPictureRequest(event) {
 }
 
 function handleAPIRequest(event) {
-  var fetchRequest = event.request.clone();
-
-  return fetch(event.request)
-    .then(function (response) {
-      //clone response to add to cache
-      const respClone = response.clone();
-      caches.open(dataCacheName).then(function (cache) {
-        cache.put(event.request, respClone);
-      });
-      return response;
-    })
+  return fetchAndCache(event.request,dataCacheName)
     .catch(function () {
       console.log('API FETCH ERROR');
       //OFFLINE
-      return caches.match(fetchRequest);
+      return caches.match(event.request);
     });
+}
+
+
+function fetchAndCache(request,cacheName){
+  return fetch(request)
+    .then(function (response) {
+      //clone response to add to cache
+      const respClone = response.clone();
+      caches.open(cacheName).then(function (cache) {
+        cache.put(request, respClone);
+      });
+      return response;
+    })
 }
