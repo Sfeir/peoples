@@ -5,7 +5,9 @@ var usemin = require('gulp-usemin');
 var connect = require('gulp-connect');
 var replace = require('gulp-replace');
 var ghPages = require('gulp-gh-pages');
+
 var del = require('del');
+var browserSync = require('browser-sync').create();
 
 
 gulp.task('copy', ['clean'], function build() {
@@ -29,10 +31,21 @@ gulp.task('eslint', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch('app/*.html', []);
-    gulp.watch('app/partials/**/*.html', []);
-    gulp.watch('app/css/**/*.css', []);
-    gulp.watch('app/js/**/*.js', []);
+    browserSync.init({
+        server: {
+            baseDir: ['./app', './node_modules']
+        },
+        port: 8080
+    });
+    gulp.watch('app/**/*.html').on('change', function(evt) {
+        browserSync.reload();
+    });
+    gulp.watch('app/css/**/*.css').on('change', function(evt) {
+        browserSync.reload();
+    });
+    gulp.watch('app/js/**/*.js').on('change', function(evt) {
+        browserSync.reload();
+    });
 });
 
 gulp.task('usemin', ['clean'], function() {
@@ -43,12 +56,6 @@ gulp.task('usemin', ['clean'], function() {
           jsapp: ['concat', replace(/templateUrl:\s*\'\.\/js(.*)\'/g, "templateUrl: './templates$1'"), rev()]
       }))
       .pipe(gulp.dest('build/'));
-});
-
-gulp.task('connect', function() {
-    connect.server({
-        root: ['app', 'node_modules']
-    });
 });
 
 gulp.task('gh-pages', ['copy', 'usemin'], function() {
@@ -65,6 +72,6 @@ gulp.task('clean', function(cb) {
     return del('build');
 });
 
-gulp.task('default', ['connect']);
+gulp.task('default', ['watch']);
 gulp.task('sw-ready', ['connect-build', 'copy', 'usemin']);
 gulp.task('deploy', ['gh-pages']);
