@@ -252,9 +252,9 @@ section > h1 {
 }
 
 #subscribeButton.show .unsubscribe, #subscribeButton.show.subscribe .subscribe{
-  display: none; !important;
+  display: block;
 }
 
 #subscribeButton.show .subscribe, #subscribeButton.show.subscribe .unsubscribe{
-  display: block;
+  display: none; !important;
 }
