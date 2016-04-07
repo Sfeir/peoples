@@ -6,6 +6,8 @@ var connect = require('gulp-connect');
 var replace = require('gulp-replace');
 var ghPages = require('gulp-gh-pages');
 
+var fs = require('fs');
+
 var del = require('del');
 var browserSync = require('browser-sync').create();
 
@@ -14,7 +16,7 @@ gulp.task('copy', ['clean'], function build() {
     gulp.src('node_modules/bootstrap/dist/fonts/*')
       .pipe(gulp.dest('build/fonts/'));
 
-    gulp.src('app/img/*')
+    gulp.src('app/img/**/*')
       .pipe(gulp.dest('build/img/'));
 
     gulp.src('app/mocks/*')
@@ -62,6 +64,23 @@ gulp.task('gh-pages', ['copy', 'usemin'], function() {
     return gulp.src('./build/**/*').pipe(ghPages({force: true}));
 });
 
+gulp.task('update-sw', ['usemin'], function() {
+    var css = fs.readdirSync('build/css');
+    var js = fs.readdirSync('build/js');
+    gulp.src('app/service-worker.js')
+      .pipe(replace(/CSS_APP/, '/css/' + css[0]))
+      .pipe(replace(/CSS_VENDOR/, '/css/' + css[1]))
+      .pipe(replace(/JS_APP/, '/js/' + js[0]))
+      .pipe(replace(/JS_VENDOR/, '/js/' + js[1]))
+      .pipe(gulp.dest('build'));
+
+    gulp.src('app/js/initSw.js')
+      .pipe(gulp.dest('build/js/'));
+
+    gulp.src('app/manifest.json')
+      .pipe(gulp.dest('build'));
+});
+
 gulp.task('connect-build', ['clean', 'usemin'], function() {
     return connect.server({
         root: ['build']
@@ -73,5 +92,5 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('default', ['watch']);
-gulp.task('sw-ready', ['connect-build', 'copy', 'usemin']);
+gulp.task('sw-ready', ['connect-build', 'copy', 'usemin', 'update-sw']);
 gulp.task('deploy', ['gh-pages']);
