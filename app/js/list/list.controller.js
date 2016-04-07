@@ -12,7 +12,7 @@
         _this.loading = true;
         _this.query = '';
 
-        People.$promise.then(function(people) {
+        People.getPeoples().then(function(people) {
             _this.people = people;
             _this.loading = false;
         });

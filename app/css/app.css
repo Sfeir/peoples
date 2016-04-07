@@ -227,3 +227,34 @@ section > h1 {
 #skills .skillActive{
   background-color: #E84F0E;
 }
+
+
+/* FAB */
+.md-fab.md-install{
+  display: none; !important;
+  background-color: #0168AB !important;
+  position: absolute !important;
+  bottom: 5px;
+  right: 10px;
+}
+
+.md-fab.md-install.show{
+  display: block;
+}
+
+/* SUBSCRIPTION */
+#subscribeButton {
+  display: none; !important;
+}
+
+#subscribeButton.show{
+  display: block;
+}
+
+#subscribeButton.show .unsubscribe, #subscribeButton.show.subscribe .subscribe{
+  display: none; !important;
+}
+
+#subscribeButton.show .subscribe, #subscribeButton.show.subscribe .unsubscribe{
+  display: block;
+}
