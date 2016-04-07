@@ -15,8 +15,7 @@
 
 
         function isCacheActive(){
-            return false;
-            //return 'caches' in window;
+            return 'caches' in window;
         }
 
         function getCacheData(url){

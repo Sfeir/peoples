@@ -34,6 +34,7 @@ var filesToCache = [
   "/js/skills/skills.html",
   "/js/components/components.module.js",
   "/js/components/services/people.service.js",
+  "/js/components/services/worker.service.js",
   "/js/components/filters/capitalize.js",
   "/js/components/filters/checkmark.js",
   "/js/components/directives/scroll.js",
