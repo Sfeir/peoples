@@ -5,7 +5,7 @@
         <md-progress-circular md-mode="indeterminate"></md-progress-circular>
     </div>
     <div flex="100" flex-xs="100" flex-sm="75" flex-gt-sm="40" ng-show="!loading">
-        <h1>Do you know ?</h1>
+        <h1>You have {{filteredPeople.length}} friends. Do you know ?</h1>
         <people-card people="homeCtrl.random"></people-card>
     </div>
 </md-content>
