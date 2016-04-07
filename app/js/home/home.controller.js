@@ -12,7 +12,7 @@
         _this.loading = true;
         _this.query = '';
 
-        People.$promise.then(function(people) {
+        People.getPeoples().then(function(people) {
             _this.people = people;
             _this.random = _this.people[Math.floor(Math.random() * _this.people.length)];
             _this.loading = false;

@@ -12,7 +12,7 @@
         _this.filteredPeople = [];
         _this.query = $routeParams.skill;
 
-        People.$promise.then(function(people) {
+        People.getPeoples().then(function(people) {
             _this.people = people;
         });
 

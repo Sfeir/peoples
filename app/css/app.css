@@ -174,7 +174,7 @@ section > h1 {
 }
 
 .extend-toolbar{
-  background: url('/img/bg_left.png') no-repeat left, url('/img/bg_right.png') no-repeat right;
+  background: url('../img/bg_left.png') no-repeat left, url('../img/bg_right.png') no-repeat right;
   background-color: #0168AB;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   z-index: 1;
@@ -226,4 +226,35 @@ section > h1 {
 /* SKILL */
 #skills .skillActive{
   background-color: #E84F0E;
+}
+
+
+/* FAB */
+.md-fab.md-install{
+  display: none; !important;
+  background-color: #0168AB !important;
+  position: absolute !important;
+  bottom: 5px;
+  right: 10px;
+}
+
+.md-fab.md-install.show{
+  display: block;
+}
+
+/* SUBSCRIPTION */
+#subscribeButton {
+  display: none; !important;
+}
+
+#subscribeButton.show{
+  display: block;
+}
+
+#subscribeButton.show .unsubscribe, #subscribeButton.show.subscribe .subscribe{
+  display: block;
+}
+
+#subscribeButton.show .subscribe, #subscribeButton.show.subscribe .unsubscribe{
+  display: none; !important;
 }

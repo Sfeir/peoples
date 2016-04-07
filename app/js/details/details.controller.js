@@ -8,8 +8,8 @@
     function DetailsController($routeParams, People) {
         var _this = this;
 
-        People.$promise.then(function() {
-            _this.sfeirien = People.get($routeParams.id);
+        People.getPeoples().then(function() {
+            _this.sfeirien = People.getPeopleById($routeParams.id);
             _this.manager = People.getCollab($routeParams.id);
         });
     }
