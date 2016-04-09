@@ -5,7 +5,7 @@
         .module('people-components')
         .factory('People', ['$http', 'CacheService', Peoples]);
 
-    function Peoples($http,CacheService) {
+    function Peoples($http, CacheService) {
         const API_URL = 'mocks/people.json';
         var cachePromise, networkPromise;
         var peoples;
@@ -14,9 +14,9 @@
         var hasRequestPending = false;
 
         var service = {
-            getPeoples:getPeoples,
-            getPeopleById:getPeopleById,
-            getCollab:getCollab
+            getPeoples    : getPeoples,
+            getPeopleById : getPeopleById,
+            getCollab     : getCollab
         };
 
         initialize();
@@ -28,13 +28,11 @@
                         if (hasRequestPending && response) {
                             peoples = response;
                             return peoples;
-                        } else {
-                            return [];
                         }
                     });
             }
             hasRequestPending = true;
-            networkPromise = $http.get(API_URL)
+            networkPromise    = $http.get(API_URL)
                 .then(function(response) {
                     hasRequestPending = false;
                     if (peoples) {
@@ -44,8 +42,7 @@
                         peoples = response.data;
                     }
                     return peoples;
-                })
-                .then(onResult);
+                });             
         }
 
         function onResult() {
@@ -58,7 +55,14 @@
 
         function getPeoples() {
             if (cachePromise) {
-                //return cachePromise;
+                return cachePromise
+                    .then(function() {
+                        if (!peoples) {
+                            return networkPromise;
+                        }
+                        return peoples;
+                    })
+                    .then(onResult);
             }
             return networkPromise.then(onResult);
         }
@@ -69,7 +73,7 @@
         }
 
         function getCollab(email) {
-            var response = {isManager: false, collab: []};
+            var response = {isManager : false, collab : []};
             angular.forEach(peopleMap, function(value, key) {
                 if (value.manager === email) {
                     response.isManager = true;
