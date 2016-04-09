@@ -36,13 +36,14 @@
                 .then(function(response) {
                     hasRequestPending = false;
                     if (peoples) {
-                        //Merge peoples
-                        peoples.push(response.data[0]);
+                        //Replace peoples
+                        Array.prototype.splice.apply(peoples, [0, peoples.length].concat(response.data));
+
                     } else {
                         peoples = response.data;
                     }
                     return peoples;
-                });             
+                });
         }
 
         function onResult() {
