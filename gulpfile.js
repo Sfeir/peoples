@@ -60,7 +60,7 @@ gulp.task('usemin', ['clean'], function() {
       .pipe(gulp.dest('build/'));
 });
 
-gulp.task('gh-pages', ['copy', 'usemin'], function() {
+gulp.task('gh-pages', ['copy', 'usemin', 'update-sw'], function() {
     return gulp.src('./build/**/*').pipe(ghPages({force: true}));
 });
 
