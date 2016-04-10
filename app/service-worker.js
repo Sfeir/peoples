@@ -2,43 +2,42 @@ var dataCacheName   = 'peoples-data-v1';
 var staticCacheName = 'peoples-static-v1';
 
 var filesToCache = [
-    '/',
-    '/index.html',
-    '/manifest.json',
-    '/js/initSw.js',
+    '',
+    'index.html',
+    'manifest/manifest.json',
+    'js/initSw.js',
     'CSS_VENDOR',
     'CSS_APP',
     'JS_VENDOR',
     'JS_APP',
-    "/templates/home/home.html",
-    "/templates/list/list.html",
-    "/templates/details/details.html",
-    "/templates/skills/skills.html",
-    "/templates/components/directives/people-card/people-card.html",
-    "/templates/components/directives/search-bar/search-bar.html",
-    '/img/bg_left.png',
-    '/img/bg_right.png',
-    '/img/logo-sfeir.svg',
-    '/img/md-cellphone.svg',
-    '/img/md-email.svg',
-    '/img/md-github.svg',
-    '/img/md-linkedin.svg',
-    '/img/md-map.svg',
-    '/img/md-phone.svg',
-    '/img/md-slack.svg',
-    '/img/md-twitter.svg',
-    '/img/profile.svg',
-    '/img/search.svg',
-    '/img/md-install.svg',
-    '/img/md-subscribe.svg',
-    '/img/md-unsubscribe.svg',
-    '/img/icons/icon-32x32.png',
-    '/img/icons/icon-128x128.png',
-    '/img/icons/icon-144x144.png',
-    '/img/icons/icon-152x152.png',
-    '/img/icons/icon-192x192.png',
-    '/img/icons/icon-256x256.png',
-    'https://fonts.gstatic.com/s/opensans/v13/cJZKeOuBrn4kERxqtaUH3ZBw1xU1rKptJj_0jans920.woff2'
+    'templates/home/home.html',
+    'templates/list/list.html',
+    'templates/details/details.html',
+    'templates/skills/skills.html',
+    'templates/components/directives/people-card/people-card.html',
+    'templates/components/directives/search-bar/search-bar.html',
+    'img/bg_left.png',
+    'img/bg_right.png',
+    'img/logo-sfeir.svg',
+    'img/md-cellphone.svg',
+    'img/md-email.svg',
+    'img/md-github.svg',
+    'img/md-linkedin.svg',
+    'img/md-map.svg',
+    'img/md-phone.svg',
+    'img/md-slack.svg',
+    'img/md-twitter.svg',
+    'img/profile.svg',
+    'img/search.svg',
+    'img/md-install.svg',
+    'img/md-subscribe.svg',
+    'img/md-unsubscribe.svg',
+    'img/icons/icon-32x32.png',
+    'img/icons/icon-128x128.png',
+    'img/icons/icon-144x144.png',
+    'img/icons/icon-152x152.png',
+    'img/icons/icon-192x192.png',
+    'img/icons/icon-256x256.png'
 ];
 
 
@@ -88,7 +87,7 @@ self.addEventListener('fetch', function(e) {
     }
 
     //Cache DATA
-    if (url.pathname == '/mocks/people.json') {
+    if (url.pathname == 'mocks/people.json') {
         e.respondWith(handleAPIRequest(e));
         return;
     }
@@ -112,7 +111,7 @@ self.addEventListener('fetch', function(e) {
 self.addEventListener('push', function(event) {
     console.log('Received a push message', event);
     event.waitUntil(
-        fetch('/mocks/notification.json')
+        fetch('mocks/notification.json')
             .then(function(resp) {
                 return resp.json();
             })

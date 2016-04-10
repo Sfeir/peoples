@@ -68,17 +68,17 @@ gulp.task('update-sw', ['usemin'], function() {
     var css = fs.readdirSync('build/css');
     var js = fs.readdirSync('build/js');
     gulp.src('app/service-worker.js')
-      .pipe(replace(/CSS_APP/, '/css/' + css[0]))
-      .pipe(replace(/CSS_VENDOR/, '/css/' + css[1]))
-      .pipe(replace(/JS_APP/, '/js/' + js[0]))
-      .pipe(replace(/JS_VENDOR/, '/js/' + js[1]))
+      .pipe(replace(/CSS_APP/, 'css/' + css[0]))
+      .pipe(replace(/CSS_VENDOR/, 'css/' + css[1]))
+      .pipe(replace(/JS_APP/, 'js/' + js[0]))
+      .pipe(replace(/JS_VENDOR/, 'js/' + js[1]))
       .pipe(gulp.dest('build'));
 
     gulp.src('app/js/initSw.js')
       .pipe(gulp.dest('build/js/'));
 
-    gulp.src('app/manifest.json')
-      .pipe(gulp.dest('build'));
+    gulp.src('app//manifest/manifest.json')
+      .pipe(gulp.dest('build/manifest'));
 });
 
 gulp.task('connect-build', ['clean', 'usemin'], function() {
