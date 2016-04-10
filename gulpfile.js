@@ -60,7 +60,7 @@ gulp.task('usemin', ['clean'], function() {
       .pipe(gulp.dest('build/'));
 });
 
-gulp.task('gh-pages', ['copy', 'usemin', 'update-sw'], function() {
+gulp.task('gh-pages', ['copy', 'usemin', 'update-sw', 'add-urlfolder'], function() {
     return gulp.src('./build/**/*').pipe(ghPages({force: true}));
 });
 
@@ -80,6 +80,15 @@ gulp.task('update-sw', ['usemin'], function() {
     gulp.src('app//manifest/manifest.json')
       .pipe(gulp.dest('build/manifest'));
 });
+
+gulp.task('add-urlfolder', function() {
+    gulp.src('build/service-worker.js')
+        .pipe(replace(/'\/'/, "'/peoples/'"))
+        .pipe(gulp.dest('build'));
+
+});
+
+
 
 gulp.task('connect-build', ['clean', 'usemin'], function() {
     return connect.server({

@@ -2,7 +2,7 @@ var dataCacheName   = 'peoples-data-v1';
 var staticCacheName = 'peoples-static-v1';
 
 var filesToCache = [
-    '',
+     '/',
     'index.html',
     'manifest/manifest.json',
     'js/initSw.js',
