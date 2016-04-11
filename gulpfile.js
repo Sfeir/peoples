@@ -6,6 +6,7 @@ var connect = require('gulp-connect');
 var replace = require('gulp-replace');
 var merge = require('merge-stream');
 var ghPages = require('gulp-gh-pages');
+var argv = require('yargs').argv;
 
 var fs = require('fs');
 
@@ -25,6 +26,11 @@ gulp.task('copy', ['clean'], function build() {
 
     var templates = gulp.src('app/js/**/*.html')
       .pipe(gulp.dest('build/templates/'));
+
+    if (argv.step) {
+        gulp.src(argv.step + '/**/*')
+          .pipe(gulp.dest('build/'));
+    }
 
     return merge(fonts, imgs, mocks, templates);
 });
@@ -104,4 +110,5 @@ gulp.task('clean', function(cb) {
 
 gulp.task('default', ['watch']);
 gulp.task('sw-ready', ['connect-build', 'copy', 'usemin', 'update-sw']);
+gulp.task('try', ['sw-ready']);
 gulp.task('deploy', ['gh-pages']);
