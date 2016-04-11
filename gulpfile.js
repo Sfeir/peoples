@@ -4,6 +4,7 @@ var rev = require('gulp-rev');
 var usemin = require('gulp-usemin');
 var connect = require('gulp-connect');
 var replace = require('gulp-replace');
+var merge = require('merge-stream');
 var ghPages = require('gulp-gh-pages');
 
 var fs = require('fs');
@@ -13,17 +14,19 @@ var browserSync = require('browser-sync').create();
 
 
 gulp.task('copy', ['clean'], function build() {
-    gulp.src('node_modules/bootstrap/dist/fonts/*')
+    var fonts = gulp.src('node_modules/bootstrap/dist/fonts/*')
       .pipe(gulp.dest('build/fonts/'));
 
-    gulp.src('app/img/**/*')
+    var imgs = gulp.src('app/img/**/*')
       .pipe(gulp.dest('build/img/'));
 
-    gulp.src('app/mocks/*')
+    var mocks = gulp.src('app/mocks/*')
       .pipe(gulp.dest('build/mocks/'));
 
-    gulp.src('app/js/**/*.html')
+    var templates = gulp.src('app/js/**/*.html')
       .pipe(gulp.dest('build/templates/'));
+
+    return merge(fonts, imgs, mocks, templates);
 });
 
 gulp.task('eslint', function() {
@@ -60,39 +63,30 @@ gulp.task('usemin', ['clean'], function() {
       .pipe(gulp.dest('build/'));
 });
 
-gulp.task('gh-pages', ['copy', 'usemin', 'update-sw', 'add-urlfolder'], function() {
+gulp.task('gh-pages', ['copy', 'usemin', 'update-sw'], function() {
     return gulp.src('./build/**/*').pipe(ghPages({force: true}));
 });
 
 gulp.task('update-sw', ['usemin'], function() {
     var css = fs.readdirSync('build/css');
     var js = fs.readdirSync('build/js');
-    gulp.src('app/service-worker.js')
+    var sw = gulp.src('app/service-worker.js')
       .pipe(replace(/CSS_APP/, 'css/' + css[0]))
       .pipe(replace(/CSS_VENDOR/, 'css/' + css[1]))
       .pipe(replace(/JS_APP/, 'js/' + js[0]))
       .pipe(replace(/JS_VENDOR/, 'js/' + js[1]))
+      .pipe(replace(/'\/'/, "'/peoples/'"))
       .pipe(gulp.dest('build'));
 
-    gulp.src('app/js/initSw.js')
+    var initsw = gulp.src('app/js/initSw.js')
+      .pipe(replace(/service-worker.js/, 'peoples/service-worker.js'))
       .pipe(gulp.dest('build/js/'));
 
-    gulp.src('app//manifest/manifest.json')
+    var manifest = gulp.src('app//manifest/manifest.json')
       .pipe(gulp.dest('build/manifest'));
+
+    return merge(sw, initsw, manifest);
 });
-
-gulp.task('add-urlfolder', function() {
-    gulp.src('build/service-worker.js')
-        .pipe(replace(/'\/'/, "'/peoples/'"))
-        .pipe(gulp.dest('build'));
-
-    gulp.src('build/js/initSw.js')
-      .pipe(replace(/service-worker.js/, "peoples/service-worker.js"))
-      .pipe(gulp.dest('build/js'));
-
-});
-
-
 
 gulp.task('connect-build', ['clean', 'usemin'], function() {
     return connect.server({

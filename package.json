@@ -45,6 +45,7 @@
     "gulp-gh-pages": "^0.5.4",
     "gulp-replace": "^0.5.4",
     "gulp-rev": "^7.0.0",
-    "gulp-usemin": "^0.3.21"
+    "gulp-usemin": "^0.3.21",
+    "merge-stream": "^1.0.0"
   }
 }
