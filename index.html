@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" ng-app="peopleApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sfeir People</title>
+  <link rel="manifest" href="manifest/manifest.json">
+  <link rel="stylesheet" href="css/vendor-433dbcc51c.css"/>
+  <link rel="stylesheet" href="css/app-b2664b56a0.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+  <meta name="theme-color" content="#020307">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+</head>
+<body>
+
+  <header>
+    <md-toolbar class="toolbar">
+      <div class="md-toolbar-tools">
+        <a href="#/home" class="toolbar-menu" layout="row" layout-align="center center">
+          <img src="img/logo-sfeir.svg" aria-label="sfeir" alt="Sfeir">
+        </a>
+        <span flex=""></span>
+        <a href="#/people" class="toolbar-menu" layout="row" layout-align="center center"><h1>People</h1></a>
+
+        <section id="subscribeButton" class="" layout="row" layout-align="center center" hidden>
+          <md-icon class="subscribe" md-svg-src="img/md-subscribe.svg"></md-icon>
+          <md-icon class="unsubscribe" md-svg-src="img/md-unsubscribe.svg"></md-icon>
+        </section>
+      </div>
+    </md-toolbar>
+    <section id="shellToolbar" class="extend-toolbar">
+      <md-button id="installButton" class="md-fab md-primary md-install" aria-label="Install app">
+        <md-icon md-svg-src="img/md-install.svg"></md-icon>
+      </md-button>
+    </section>
+  </header>
+
+  <main class="view-container">
+    <div ng-view autoscroll="true" class="view-frame view-animate"></div>
+  </main>
+
+  <script src="js/initSw.js"></script>
+
+  <script src="js/vendor-722fc46155.js"></script>
+
+  <script src="js/app-430966bf99.js"></script>
+</body>
+</html>
