@@ -86,6 +86,10 @@ gulp.task('add-urlfolder', function() {
         .pipe(replace(/'\/'/, "'/peoples/'"))
         .pipe(gulp.dest('build'));
 
+    gulp.src('build/js/initSw.js')
+      .pipe(replace(/service-worker.js/, "peoples/service-worker.js"))
+      .pipe(gulp.dest('build/js'));
+
 });
 
 
