@@ -44,6 +44,9 @@
 
       });
     subscribeButton = document.getElementById('subscribeButton');
+    installButton = document.getElementById('installButton');
+
+    installButton.addEventListener("click", onInstall);
 
     subscribeButton.addEventListener("click", function (e) {
       if (isSubscribed) {
@@ -75,8 +78,6 @@
     }
 
     window.addEventListener("beforeinstallprompt", function (e) {
-      installButton = document.getElementById('installButton');
-      installButton.addEventListener("click", onInstall);
       e.preventDefault();
       console.log('install ?');
       deferredEvent = e;
