@@ -1,0 +1,6 @@
+<md-content scroll ng-class="{min:boolChangeClass}" class="search-toolbar fixed" layout="row" layout-align="center end">
+    <md-input-container class="md-icon-right">
+        <md-icon md-svg-icon="img/search.svg"></md-icon>
+        <input ng-keyup="$event.keyCode == 13 && pressEnter()" class="search-input" ng-model="query" tabindex="1" id="filter" aria-label="search">
+    </md-input-container>
+</md-content>
