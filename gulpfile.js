@@ -59,7 +59,19 @@ gulp.task('watch', function() {
     });
 });
 
-gulp.task('usemin', ['clean'], function() {
+gulp.task('watch-try', function() {
+    browserSync.init({
+        server: {
+            baseDir: ['./build']
+        },
+        port: 8080
+    });
+    gulp.watch(['app/**/*.html', 'app/css/**/*.css', 'app/js/**/*.js', argv.step + '/**/*'], ['copy', 'usemin', 'update-sw']).on('change', function(evt) {
+        browserSync.reload();
+    });
+});
+
+gulp.task('usemin', ['copy'], function() {
     return gulp.src('app/index.html')
       .pipe(usemin({
           css: ['concat', function() { return rev(); }],
@@ -81,6 +93,7 @@ gulp.task('update-sw', ['usemin'], function() {
       .pipe(replace(/CSS_VENDOR/, 'css/' + css[1]))
       .pipe(replace(/JS_APP/, 'js/' + js[0]))
       .pipe(replace(/JS_VENDOR/, 'js/' + js[1]))
+      .pipe(replace(/'\/'/, "'/peoples/'"))
       .pipe(gulp.dest('build'));
 
     var initsw = gulp.src('app/js/initSw.js')
@@ -90,12 +103,6 @@ gulp.task('update-sw', ['usemin'], function() {
       .pipe(gulp.dest('build/manifest'));
 
     return merge(sw, initsw, manifest);
-});
-
-gulp.task('add-urlfolder', ['clean'], function() {
-    return gulp.src('build/service-worker.js')
-        .pipe(replace(/'\/'/, "'/peoples/'"))
-        .pipe(gulp.dest('build'));
 });
 
 gulp.task('connect-build', ['clean', 'usemin'], function() {
@@ -110,5 +117,5 @@ gulp.task('clean', function(cb) {
 
 gulp.task('default', ['watch']);
 gulp.task('sw-ready', ['connect-build', 'copy', 'usemin', 'update-sw']);
-gulp.task('try', ['sw-ready']);
+gulp.task('try', ['copy', 'usemin', 'update-sw', 'watch-try']);
 gulp.task('deploy', ['gh-pages']);
