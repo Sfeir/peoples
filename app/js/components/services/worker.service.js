@@ -3,14 +3,15 @@
 
     angular
         .module('people-components')
-        .factory('CacheService', ['$http', CacheService]);
+        .factory('CacheService', ['$q', CacheService]);
 
-    function CacheService($http) {
+    function CacheService($q) {
 
+        var deferred = $q.defer();
 
         var service = {
-            isCacheActive:isCacheActive,
-            getCacheData:getCacheData
+            isCacheActive : isCacheActive,
+            getCacheData  : getCacheData
         };
 
 
@@ -18,13 +19,17 @@
             return 'caches' in window;
         }
 
-        function getCacheData(url){
+        function getCacheData(url) {
             if (isCacheActive()) {
-                return caches.match(url).then(function(response) {
+                caches.match(url).then(function(response) {
+                    var data;
                     if (response) {
-                        return response.json();
+                        data = response.json();
                     }
+                    //must be wrap in Angular promise for digest cycle
+                    deferred.resolve(data);
                 });
+                return deferred.promise;
             }
         }
 
