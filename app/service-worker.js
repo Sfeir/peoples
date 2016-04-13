@@ -87,7 +87,7 @@ self.addEventListener('fetch', function(e) {
     }
 
     //Cache DATA
-    if (url.pathname == '/mocks/people.json') {
+    if (url.pathname.indexOf('mocks/people.json')!=-1) {
         e.respondWith(handleAPIRequest(e));
         return;
     }
