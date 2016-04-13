@@ -63,7 +63,7 @@ gulp.task('usemin', ['clean'], function() {
       .pipe(gulp.dest('build/'));
 });
 
-gulp.task('gh-pages', ['copy', 'usemin', 'update-sw'], function() {
+gulp.task('gh-pages', ['copy', 'usemin', 'update-sw', 'add-urlfolder'], function() {
     return gulp.src('./build/**/*').pipe(ghPages({force: true}));
 });
 
@@ -75,7 +75,6 @@ gulp.task('update-sw', ['usemin'], function() {
       .pipe(replace(/CSS_VENDOR/, 'css/' + css[1]))
       .pipe(replace(/JS_APP/, 'js/' + js[0]))
       .pipe(replace(/JS_VENDOR/, 'js/' + js[1]))
-      .pipe(replace(/'\/'/, "'/peoples/'"))
       .pipe(gulp.dest('build'));
 
     var initsw = gulp.src('app/js/initSw.js')
@@ -85,6 +84,18 @@ gulp.task('update-sw', ['usemin'], function() {
       .pipe(gulp.dest('build/manifest'));
 
     return merge(sw, initsw, manifest);
+});
+
+gulp.task('add-urlfolder', function() {
+    var sw = gulp.src('build/service-worker.js')
+        .pipe(replace(/'\/'/, "'/peoples/'"))
+        .pipe(gulp.dest('build'));
+
+    var initsw = gulp.src('build/js/initSw.js')
+        .pipe(replace(/service-worker.js/, "peoples/service-worker.js"))
+        .pipe(gulp.dest('build/js'));
+
+    return merge(sw, initsw);
 });
 
 gulp.task('connect-build', ['clean', 'usemin'], function() {
