@@ -14,7 +14,7 @@
         };
 
 
-        function isCacheActive(){
+        function isCacheActive() {
             return 'caches' in window;
         }
 

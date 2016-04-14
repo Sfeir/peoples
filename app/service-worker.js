@@ -81,7 +81,7 @@ self.addEventListener('fetch', function(e) {
     const url = new URL(e.request.url);
 
     //Cache avatar
-    if (url.origin == 'http://api.randomuser.me') {
+    if (url.origin == 'https://randomuser.me') {
         e.respondWith(handleUserPictureRequest(e));
         return;
     }
