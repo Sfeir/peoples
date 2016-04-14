@@ -1,18 +1,18 @@
-(function () {
-  var deferredEvent;
-  var installButton;
-  var subscribeButton;
-  var reg;
-  var sub;
-  var isSubscribed = false;
+(function() {
+    var deferredEvent;
+    var installButton;
+    var subscribeButton;
+    var reg;
+    var sub;
+    var isSubscribed = false;
 
 
-  if ('serviceWorker' in navigator) {
-    /*navigator.serviceWorker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
       //.register('/swTest.js')
-      .register('service-worker.js')
-      .then(function (swreg) {
-        reg = swreg;*/
+        .register('service-worker.js')
+        .then(function(swreg) {
+            reg = swreg;
 
         /*
          swreg.pushManager.subscribe({
@@ -24,8 +24,8 @@
          */
 
 
-        console.log('Service Worker Registered');
-        subscribeButton.classList.add('show');
+            console.log('Service Worker Registered');
+            subscribeButton.classList.add('show');
 
 
         /*
