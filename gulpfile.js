@@ -59,6 +59,8 @@ gulp.task('watch', function() {
     });
 });
 
+gulp.task('reload', ['copy', 'usemin', 'update-sw-try'], browserSync.reload);
+
 gulp.task('watch-try', function() {
     browserSync.init({
         server: {
@@ -66,9 +68,26 @@ gulp.task('watch-try', function() {
         },
         port: 8080
     });
-    gulp.watch(['app/**/*.html', 'app/css/**/*.css', 'app/js/**/*.js', argv.step + '/**/*'], ['copy', 'usemin', 'update-sw']).on('change', function(evt) {
-        browserSync.reload();
-    });
+    gulp.watch(['app/**/*.html', 'app/css/**/*.css', 'app/js/**/*.js', argv.step + '/**/*'], ['reload']);
+});
+
+gulp.task('update-sw-try', ['usemin'], function() {
+    var css = fs.readdirSync('build/css');
+    var js = fs.readdirSync('build/js');
+    var sw = gulp.src('build/service-worker.js')
+      .pipe(replace(/CSS_APP/, 'css/' + css[0]))
+      .pipe(replace(/CSS_VENDOR/, 'css/' + css[1]))
+      .pipe(replace(/JS_APP/, 'js/' + js[0]))
+      .pipe(replace(/JS_VENDOR/, 'js/' + js[1]))
+      .pipe(gulp.dest('build'));
+
+    var initsw = gulp.src('app/js/initSw.js')
+      .pipe(gulp.dest('build/js/'));
+
+    var manifest = gulp.src('app/manifest/manifest.json')
+      .pipe(gulp.dest('build/manifest'));
+
+    return merge(sw, initsw, manifest);
 });
 
 gulp.task('usemin', ['copy'], function() {
@@ -99,7 +118,7 @@ gulp.task('update-sw', ['usemin'], function() {
     var initsw = gulp.src('app/js/initSw.js')
       .pipe(gulp.dest('build/js/'));
 
-    var manifest = gulp.src('app//manifest/manifest.json')
+    var manifest = gulp.src('app/manifest/manifest.json')
       .pipe(gulp.dest('build/manifest'));
 
     return merge(sw, initsw, manifest);
@@ -117,5 +136,5 @@ gulp.task('clean', function(cb) {
 
 gulp.task('default', ['watch']);
 gulp.task('sw-ready', ['connect-build', 'copy', 'usemin', 'update-sw']);
-gulp.task('try', ['copy', 'usemin', 'update-sw', 'watch-try']);
+gulp.task('try', ['copy', 'usemin', 'update-sw-try', 'watch-try']);
 gulp.task('deploy', ['gh-pages']);

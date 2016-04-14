@@ -8,7 +8,6 @@
     "angular": true
   },
   "rules": {
-    "consistent-return": 2,
     "curly": 0,
     "comma-dangle": 0,
     "dot-notation": 0,
