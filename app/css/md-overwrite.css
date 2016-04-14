@@ -7,28 +7,35 @@ md-toolbar:not(.md-menu-toolbar){
 md-card{
   border-radius: 0px;
 }
+
 /*champs de recherche*/
 md-input-container:not(.md-input-invalid).md-input-focused .md-input {
     border-color: white;
 }
+
 md-input-container:not(.md-input-invalid) .md-input,
-md-input-container:not(.md-input-invalid) .md-input-has-value
-{
+md-input-container:not(.md-input-invalid) .md-input-has-value{
 	color: white;
 }
+
 md-input-container label:not(.md-container-ignore){
   bottom: 55%!important;
   color: white;
 }
+
 md-input-container:not(.md-container-ignore).md-input-focused label{
 	color: white;
 }
+
 md-input-container .md-input{
   width: 100%;
   font-size: 44px;
   height: 56px !important;
   border-color: white;
+}
 
+md-input-container {
+  margin-left: 20px;
 }
 
 .extend-toolbar md-input-container.md-has-icon{
