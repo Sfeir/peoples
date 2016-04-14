@@ -2,14 +2,14 @@ var dataCacheName   = 'peoples-data-v1';
 var staticCacheName = 'peoples-static-v1';
 
 var filesToCache = [
-     '/peoples/',
+    '/peoples/',
     'index.html',
     'manifest/manifest.json',
     'js/initSw.js',
     'css/vendor-433dbcc51c.css',
     'css/app-b2664b56a0.css',
     'js/vendor-722fc46155.js',
-    'js/app-10d4f75137.js',
+    'js/app-77e5a37b8d.js',
     'templates/home/home.html',
     'templates/list/list.html',
     'templates/details/details.html',

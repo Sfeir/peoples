@@ -8,11 +8,11 @@
 
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
+    /*navigator.serviceWorker
       //.register('/swTest.js')
-      .register('/peoples/service-worker.js')
+      .register('service-worker.js')
       .then(function (swreg) {
-        reg = swreg;
+        reg = swreg;*/
 
         /*
          swreg.pushManager.subscribe({
@@ -111,4 +111,3 @@
   }
 
 })();
-

@@ -89,14 +89,18 @@
 
     angular
         .module('people-home')
-        .controller('HomeController', ['People', HomeController]);
+        .controller('HomeController', ['$location', 'People', HomeController]);
 
-    function HomeController(People) {
+    function HomeController($location, People) {
         var _this = this;
 
         _this.filteredPeople = [];
         _this.loading = true;
         _this.query = '';
+
+        _this.goToPeopleStep = function goToPeopleStep() {
+            $location.path('/people/');
+        };
 
         People.getPeoples().then(function(people) {
             _this.people = people;
@@ -427,12 +431,13 @@
     function peopleCardDirective($routeParams) {
         return {
             scope: {
-                people: '<',
+                people: '=',
                 describe: '<',
                 skillOn: '<'
             },
             templateUrl: './templates/components/directives/people-card/people-card.html',
             link : function(scope) {
+                scope.describe = scope.describe;
                 scope.mySplit = function(string) {
                     return string ? string.split('@')[0] : '';
                 };
@@ -446,16 +451,22 @@
 
     angular
         .module('people-components')
-        .directive('searchBar', ['$location', searchBarDirective]);
+        .directive('searchBar', ['$location','$timeout', searchBarDirective]);
 
-    function searchBarDirective($location) {
+    function searchBarDirective($location, $timeout) {
         return {
             scope: {
                 filteredPeople: '<',
-                query: '='
+                query: '=',
+                focus: '@'
             },
             templateUrl: './templates/components/directives/search-bar/search-bar.html',
-            link : function(scope) {
+            link : function(scope, element) {
+                if (scope.focus) {
+                    $timeout(function() {
+                        element.find('input').focus();
+                    });
+                }
                 scope.pressEnter = function() {
                     $location.path('/people/' + scope.filteredPeople.email);
                 };
