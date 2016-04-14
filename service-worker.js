@@ -7,7 +7,7 @@ var filesToCache = [
     'manifest/manifest.json',
     'js/initSw.js',
     'css/vendor-433dbcc51c.css',
-    'css/app-b2664b56a0.css',
+    'css/app-f2fca3c26b.css',
     'js/vendor-722fc46155.js',
     'js/app-77e5a37b8d.js',
     'templates/home/home.html',
