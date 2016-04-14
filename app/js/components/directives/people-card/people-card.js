@@ -8,12 +8,13 @@
     function peopleCardDirective($routeParams) {
         return {
             scope: {
-                people: '<',
+                people: '=',
                 describe: '<',
                 skillOn: '<'
             },
             templateUrl: './js/components/directives/people-card/people-card.html',
             link : function(scope) {
+                scope.describe = scope.describe;
                 scope.mySplit = function(string) {
                     return string ? string.split('@')[0] : '';
                 };

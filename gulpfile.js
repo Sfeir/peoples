@@ -79,7 +79,6 @@ gulp.task('update-sw', ['usemin'], function() {
       .pipe(gulp.dest('build'));
 
     var initsw = gulp.src('app/js/initSw.js')
-      .pipe(replace(/service-worker.js/, 'peoples/service-worker.js'))
       .pipe(gulp.dest('build/js/'));
 
     var manifest = gulp.src('app//manifest/manifest.json')

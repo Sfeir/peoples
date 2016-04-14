@@ -3,14 +3,18 @@
 
     angular
         .module('people-home')
-        .controller('HomeController', ['People', HomeController]);
+        .controller('HomeController', ['$location', 'People', HomeController]);
 
-    function HomeController(People) {
+    function HomeController($location, People) {
         var _this = this;
 
         _this.filteredPeople = [];
         _this.loading = true;
         _this.query = '';
+
+        _this.goToPeopleStep = function goToPeopleStep() {
+            $location.path('/people/');
+        };
 
         People.getPeoples().then(function(people) {
             _this.people = people;
