@@ -6,7 +6,7 @@
         .factory('People', ['$http', 'CacheService', Peoples]);
 
     function Peoples($http, CacheService) {
-        const API_URL = '/mocks/people.json';
+        const API_URL = 'mocks/people.json';
         var cachePromise, networkPromise;
         var peoples;
         var peopleMap = new Map();
