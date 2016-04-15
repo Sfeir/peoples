@@ -86,13 +86,13 @@ gulp.task('update-sw', ['usemin'], function() {
     return merge(sw, initsw, manifest);
 });
 
-gulp.task('add-urlfolder', function() {
+gulp.task('add-urlfolder', ['update-sw'], function() {
     var sw = gulp.src('build/service-worker.js')
         .pipe(replace(/'\/'/, "'/peoples/'"))
         .pipe(gulp.dest('build'));
 
     var initsw = gulp.src('build/js/initSw.js')
-        .pipe(replace(/service-worker.js/, "peoples/service-worker.js"))
+        .pipe(replace(/service-worker.js/, "/peoples/service-worker.js"))
         .pipe(gulp.dest('build/js'));
 
     return merge(sw, initsw);
