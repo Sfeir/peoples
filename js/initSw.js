@@ -10,7 +10,7 @@
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker
       //.register('/swTest.js')
-        .register('peoples/service-worker.js')
+        .register('/peoples/service-worker.js')
         .then(function(swreg) {
             reg = swreg;
 
