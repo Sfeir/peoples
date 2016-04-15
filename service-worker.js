@@ -7,9 +7,9 @@ var filesToCache = [
     'manifest/manifest.json',
     'js/initSw.js',
     'css/vendor-433dbcc51c.css',
-    'css/app-f2fca3c26b.css',
+    'css/app-6801eef9ba.css',
     'js/vendor-722fc46155.js',
-    'js/app-77e5a37b8d.js',
+    'js/app-99fe55b829.js',
     'templates/home/home.html',
     'templates/list/list.html',
     'templates/details/details.html',
@@ -81,13 +81,13 @@ self.addEventListener('fetch', function(e) {
     const url = new URL(e.request.url);
 
     //Cache avatar
-    if (url.origin == 'http://api.randomuser.me') {
+    if (url.origin == 'https://randomuser.me') {
         e.respondWith(handleUserPictureRequest(e));
         return;
     }
 
     //Cache DATA
-    if (url.pathname == 'mocks/people.json') {
+    if (url.pathname.indexOf('mocks/people.json')!=-1) {
         e.respondWith(handleAPIRequest(e));
         return;
     }
