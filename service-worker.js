@@ -9,7 +9,7 @@ var filesToCache = [
     'css/vendor-433dbcc51c.css',
     'css/app-6801eef9ba.css',
     'js/vendor-722fc46155.js',
-    'js/app-99fe55b829.js',
+    'js/app-4438cbb3e0.js',
     'templates/home/home.html',
     'templates/list/list.html',
     'templates/details/details.html',
