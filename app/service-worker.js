@@ -1,5 +1,7 @@
-var dataCacheName   = 'peoples-data-v1';
-var staticCacheName = 'peoples-static-v1';
+var version='@version@';
+
+var dataCacheName   = 'peoples-data-'+version;
+var staticCacheName = 'peoples-static-'+version;
 
 var filesToCache = [
     '/',

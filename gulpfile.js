@@ -68,9 +68,11 @@ gulp.task('gh-pages', ['copy', 'usemin', 'update-sw', 'add-urlfolder'], function
 });
 
 gulp.task('update-sw', ['usemin'], function() {
+    var pjson = require('./package.json');
     var css = fs.readdirSync('build/css');
     var js = fs.readdirSync('build/js');
     var sw = gulp.src('app/service-worker.js')
+      .pipe(replace(/@version@/, pjson.version))
       .pipe(replace(/CSS_APP/, 'css/' + css[0]))
       .pipe(replace(/CSS_VENDOR/, 'css/' + css[1]))
       .pipe(replace(/JS_APP/, 'js/' + js[0]))
@@ -87,6 +89,7 @@ gulp.task('update-sw', ['usemin'], function() {
 });
 
 gulp.task('add-urlfolder', ['update-sw'], function() {
+
     var sw = gulp.src('build/service-worker.js')
         .pipe(replace(/'\/'/, "'/peoples/'"))
         .pipe(gulp.dest('build'));
