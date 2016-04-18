@@ -1,7 +1,7 @@
-var version='@version@';
+var version = '@version@';
 
-var dataCacheName   = 'peoples-data-'+version;
-var staticCacheName = 'peoples-static-'+version;
+var dataCacheName   = 'peoples-data-' + version;
+var staticCacheName = 'peoples-static-' + version;
 
 var filesToCache = [
     '/',
@@ -89,7 +89,7 @@ self.addEventListener('fetch', function(e) {
     }
 
     //Cache DATA
-    if (url.pathname.indexOf('mocks/people.json')!=-1) {
+    if (url.pathname.indexOf('mocks/people.json') != -1) {
         e.respondWith(handleAPIRequest(e));
         return;
     }
@@ -183,16 +183,10 @@ self.addEventListener('notificationclick', function(event) {
 });
 
 function handleUserPictureRequest(event) {
-    return caches.match(event.request)
-        .then(function(response) {
-            if (response) {
-                return response;
-            }
-            return fetchAndCache(event.request, staticCacheName);
-        })
-        .catch(function() {
-            console.log('PICTURE FETCH ERROR');
-        })
+    return caches.match(event.request).then(function(response) {
+        var fetchPromise = fetchAndCache(event.request, staticCacheName);
+        return response || fetchPromise;
+    });
 }
 
 function handleAPIRequest(event) {
