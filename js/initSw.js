@@ -12,34 +12,35 @@
       //.register('/swTest.js')
         .register('/peoples/service-worker.js')
         .then(function(swreg) {
+            console.log('Service Worker Registered');
             reg = swreg;
 
-        /*
-         swreg.pushManager.subscribe({
-         userVisibleOnly: true
-         }).then(function(sub) {
-         console.log('endpoint:', sub.endpoint);
-         });
-
-         */
-
-
-            console.log('Service Worker Registered');
-            subscribeButton.classList.add('show');
+            //Check if user already subscribed
+            reg.pushManager.getSubscription()
+                .then(function(pushSubscription) {
+                    if(pushSubscription){
+                        sub = pushSubscription;
+                        console.log('Subscribed! Endpoint:', sub.endpoint);
+                        subscribeButton.classList.add('subscribe');
+                        isSubscribed = true;
+                    }
+                    else{
+                        subscribeButton.classList.remove('subscribe');
+                        isSubscribed = false;
+                    }
+                    subscribeButton.classList.add('show');
+                });
 
 
         /*
 
          TO SEND NOTIFICATIONS
-           $ api_key=AIzaSyC3wAx8oj4b-2YW4LCSBEouwLGFwxVoF0Q
-           $ curl --header "Authorization: key=$api_key" \
+           curl --header "Authorization: key=your_api_key" \
            --header Content-Type:"application/json" \
            https://gcm-http.googleapis.com/gcm/send \
            -d "{\"registration_ids\":[\"XXXXX\"]}"
 
          where XXXX is the id endpoint
-
-
          */
 
       });
